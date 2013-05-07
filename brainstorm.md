@@ -17,6 +17,7 @@ USER
 View (display data, user interface)
 - display welcome message
 - display results screen (with various kinds of graphs and diagrams)
+- display admin pages for admin and user 
 
 Model (insert, update, and save data)
 
