@@ -1,4 +1,6 @@
 Voter::Application.routes.draw do
+  get "users/new"
+
   resources :stacks
 
 
