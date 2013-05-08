@@ -1,5 +1,5 @@
-Enter file contents here/*********************************************************************************
-  
+/*********************************************************************************
+	
 	Voter API  Version 0.1
 	
 	
@@ -196,11 +196,11 @@ Invocation might be performed through a POST or GET request
 	Params:
 		id=ID for the required survey
 		questionId= ID For the question to query
-		answerId= ID For the selected question
+	
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=respondQuestion&id=1&questionId=1&customerId=1234&answerId=2
+	http://10.172.71.29/ct/voter.aspx?op=getQuestionResults&id=1&questionId=1
 
 	
 	Result:	
