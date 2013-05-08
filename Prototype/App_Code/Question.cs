@@ -26,7 +26,7 @@ public class Question
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         Question s = this;
         sb.Append("{\"ID\":\"" + s.ID + "\",");
-        sb.Append("\"label\":\"" + s.label  + "\"");
+        sb.Append("\"label\":\"" + s.label  + "\",");
         sb.Append("\"status\":\"" + s.status + "\"");
 
         if (withInner)

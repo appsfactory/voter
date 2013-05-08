@@ -1,8 +1,10 @@
 ﻿var currentSurveys = new Array();
+var questionPolling = 0;
+var questionPollingTime = 5000;
 var currentSurvey = new Object();
 var currentQuestion = null;
 var currentQuestions = new Array();
-var ENDPOINT="data/";
+var ENDPOINT = "http://10.172.71.29/ct/voter.aspx?op=";
 
 
 
@@ -10,8 +12,10 @@ var ENDPOINT="data/";
     Retrieves a Survey object by its ID
 *****************************************************/
 function getSurveyById(id) {
+
+
     for (var i in currentSurveys) {
-        if (currentSurveys[i].surveyID == id)
+        if (currentSurveys[i].ID == id)
             return currentSurveys[i];
     }
     return null;
@@ -23,7 +27,7 @@ function getSurveyById(id) {
 *****************************************************/
 function getQuestionById(id) {
     for (var i in currentQuestions) {
-        if (currentQuestions[i].questionID == id)
+        if (currentQuestions[i].ID == id)
             return currentQuestions[i];
     }
     return null;
@@ -35,7 +39,7 @@ function getQuestionById(id) {
 *****************************************************/
 function getQuestionIndexById(id) {
     for (var i in currentQuestions) {
-        if (currentQuestions[i].questionID == id)
+        if (currentQuestions[i].ID == id)
             return i;
     }
     return -1;
@@ -49,7 +53,8 @@ function shrinkQuestions() {
     var newArray = new Array();
     for (var i in currentQuestions) {
         var question = currentQuestions[i];
-        if (question!=null && question.status=="available") {
+        //if (question!=null && question.status=="available") {
+        if (question != null ) {
             newArray.push(question);           
         }
     }
@@ -60,7 +65,7 @@ function shrinkQuestions() {
 *****************************************************/
 function getSurveys() {
 
-    $.get(ENDPOINT + "Surveys.js", function (data) {
+    $.post(ENDPOINT + "getSurveys", function (data) {
         currentSurveys = data;
         displaySurveys();
 
@@ -87,9 +92,9 @@ function displaySurveys() {
 
         //Set attributes
         spacer.className = "spacer";
-        button.id = survey.surveyID;
+        button.id = survey.ID;
         button.className = "button";
-        button.innerHTML = survey.surveyName;
+        button.innerHTML = survey.label;
         button.style.width = "150px";
         ans.appendChild(button);
         ans.appendChild(spacer);
@@ -97,8 +102,17 @@ function displaySurveys() {
            //Set this Survey as the current one..
 
             $("#Surveys").hide();
-            currentSurvey = getSurveyById(this.id);
-            getAvailableQuestions();
+
+            $.post(ENDPOINT + "getSurvey&id=" + this.id, function (data) {
+           
+                currentSurvey=data;
+                getAvailableQuestions(currentSurvey);
+
+            }, "json");
+
+
+             
+            
 
         };
 
@@ -121,15 +135,14 @@ function getAvailableQuestions(survey){
 
 	//Retrieve current questions..
 		
-    $.get(ENDPOINT+"Questions.js?id="+survey, function (data) {	
 
         // For each question validate if it's new or has changed...
 
-        for(var i in data){
-            var question=data[i];
+        for(var i in survey.questions){
+            var question=survey.questions[i];
             // Validate if it has changed..
 
-            var index = getQuestionIndexById(question.questionID);
+            var index = getQuestionIndexById(question.ID);
             //Replace..
 
             if (index >= 0) {
@@ -149,7 +162,7 @@ function getAvailableQuestions(survey){
         //Remove answers
         shrinkQuestions();
 		
-    },"json");
+    
 	
 	
 }
@@ -160,9 +173,10 @@ function getAvailableQuestions(survey){
 
 function displayQuestion(survey) {
 
+    
     var question = document.getElementById("Question");
     //Display the question
-    question.innerHTML = survey.question;
+    question.innerHTML = survey.label;
 
     var ans = document.getElementById("Options");
     ans.innerHTML = "";
@@ -185,9 +199,9 @@ function displayQuestion(survey) {
             //Send this response as the correct one for the survey
 
             var response = {
-                surveyID: currentSurvey.surveyID,
-                questionID: survey.questionID,
-                responseID: answer.value
+                surveyID: currentSurvey.ID,
+                questionID: survey.ID,
+                responseID: answer.ID
 
             };
 
@@ -205,44 +219,75 @@ function displayQuestion(survey) {
 /*****************************************************
     Send response to the server
 *****************************************************/
+function getClientID() {
+
+    return "ID";
+
+}
+/*****************************************************
+    Send response to the server
+*****************************************************/
 function submitResponse(response) {
 
     // Post the Answer to the Server..
-    $.get("ProcessVote.aspx?survey="+response.surveyID+"&question="+response.questionID+"&answer="+ response.responseID, function (data) {        
+    $.post(ENDPOINT+ "respondQuestion&id=" + response.surveyID + "&questionId=" + response.questionID + "&answerId=" + response.responseID+"&customerId="+ getClientID(), function (data) {
 
+        // Get the current Question Index..
         var index = getQuestionIndexById(response.questionID);
 
-        if (index >= 0) {
-            currentQuestions[index] = null;
-            shrinkQuestions();
-        }
-        
+        index++;
+        if (index < currentQuestions.length && index >0 ) {
+            //The curent Question is this one.. wait until it's available
+            currentQuestion = currentQuestions[index];
+            nextQuestion(currentQuestion);
+        } else {
 
-        nextQuestion(response);
+            //End 
+            $("#container").hide();
+            $("#Thanks").show();
+
+        }
+
+        
         
 
     });
 
 }
 
+
 /*****************************************************
    Get current Results
 *****************************************************/
-function nextQuestion(response) {
+function nextQuestion() {
 
-    //Replace
-    if (currentQuestions.length > 0) {
-        $("#container").show();
-        currentQuestion = currentQuestions[0];
-        displayQuestion(currentQuestion);
-    } else {
+    //Set a new timer to poll the question..
 
-        waitForQuestionResults(response);
-         
+    $("#container").hide();
+    $("#Waiting").show();
 
-    }
+    questionPolling = setInterval(function () {
+        //Retrieve status of current question..
+        
+        $.post(ENDPOINT + "getQuestionStatus&id=" +  currentSurvey.ID + "&questionId=" + currentQuestion.ID , function (data) {
 
-    
+            if (data.status != "created") {
+
+                //Clear the interval
+                clearInterval(questionPolling);
+
+                //Display the question
+
+                
+                displayQuestion(currentQuestion);
+                $("#Waiting").hide();
+                $("#container").show();
+                
+
+            }
+        });
+
+    }, questionPollingTime);
 
 }
 
@@ -265,7 +310,7 @@ function waitForQuestionResults(response) {
 *****************************************************/
 function checkQuestionResults(response) {
 
-    $.get("Results.aspx", function (data) {
+    $.post(ENDPOINT + "getQuestionResults&id=" + response.surveyID+"&questionId="+ response.questionID, function (data) {
 
         
         var question = document.getElementById("Question");
@@ -285,15 +330,7 @@ function checkQuestionResults(response) {
 function getResults() {
 
       
-    
-    
-    $.get("Results.aspx", function (data) {
-
-        var question = document.getElementById("Question");
-        //Display the question
-        question.innerHTML = data.question;
-        drawBars(data);
-    });
+     
 
     
 }
