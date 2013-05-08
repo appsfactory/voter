@@ -13,12 +13,44 @@
 
 </head>
 <body>
+  <div id="ManageSurveys">
     <h1>Manage Surveys</h1>
     <br>
     <button type="button" class="button" onclick="addNewSurvey()">Add New Survey</button>
     <div id="MySurveyList">
 
     </div>
+  </div>
+
+  <form>
+  <div id="QuestionAdder" style.display=none>
+    <h1>Create Survey</h1>
+    <p>Survey Name: <input type="text" name="name" id=name></p>
+    <form>
+      <button type="button" class="button" onclick="addNewQuestion()">Add Question</button>
+      <div id="NewQuestions">
+
+      </div>
+      <button type="button" class="button" onclick="createNewSurvey()">Add Survey</button>
+    </form>
+  </div>
+
+  <div id="AnswerAdder" style.display=hidden>
+    <h1>Edit Question</h1>
+    <br>
+  <form>
+    <p>Question : <input type="text" name="question" id=question></p>
+
+      <div id="NewAnswers">
+
+      </div>
+      <button type="button" class="button" onclick="addNewAnswer()">Add Answer</button>
+
+      <button type="button" class="button" onclick="finishEditAnswers()">Add Question</button>
+  </form>
+</div>
+
+  </form>
 </body>
 </html>
 
