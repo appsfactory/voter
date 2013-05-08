@@ -1,58 +1,183 @@
-﻿
+﻿var currentSurveys = new Array();
+var currentSurvey = new Object();
+var currentQuestion = null;
+var currentQuestions = new Array();
+var ENDPOINT="data/";
+
+
 
 /*****************************************************
-    Get survey question(s) from the server 
+    Retrieves a Survey object by its ID
 *****************************************************/
-
-function getSurvey() {
-
-    //Invoke service
-    //TODO  Invoke endpoint...
-
-    
-
-
-    //Display the question
-    var survey = {
-        questionId: 1,
-        question: "What colour is the sky?",
-
-        answers: [
-            { id: 1, text: "It's blue" },
-            { id: 2, text: "It's green" },
-            { id: 3, text: "It's yellow" }
-        ]
-
-
-    };
-
-    displaySurvey(survey);
-
+function getSurveyById(id) {
+    for (var i in currentSurveys) {
+        if (currentSurveys[i].surveyID == id)
+            return currentSurveys[i];
+    }
+    return null;
 }
 
 
 /*****************************************************
-    Display in the Results Divs the question
+    Retrieves a Question object by its ID
 *****************************************************/
-function displaySurvey(survey) {
+function getQuestionById(id) {
+    for (var i in currentQuestions) {
+        if (currentQuestions[i].questionID == id)
+            return currentQuestions[i];
+    }
+    return null;
+}
 
-    var question = document.getElementById("Question");
-    //Display the question
-    question.innerHTML = survey.question;
 
-    var ans = document.getElementById("Options");
+/*****************************************************
+    Retrieves a Question index by its ID
+*****************************************************/
+function getQuestionIndexById(id) {
+    for (var i in currentQuestions) {
+        if (currentQuestions[i].questionID == id)
+            return i;
+    }
+    return -1;
+}
+
+/*****************************************************
+    Remove empty or invalid not visibles answers from  the pool
+*****************************************************/
+function shrinkQuestions() {
+
+    var newArray = new Array();
+    for (var i in currentQuestions) {
+        var question = currentQuestions[i];
+        if (question!=null && question.status=="available") {
+            newArray.push(question);           
+        }
+    }
+    currentQuestions = newArray;
+}
+/*****************************************************
+    Get survey question(s) from the server 
+*****************************************************/
+function getSurveys() {
+
+    $.get(ENDPOINT + "Surveys.js", function (data) {
+        currentSurveys = data;
+        displaySurveys();
+
+    },"json");
+
+
+   
+}
+
+/*****************************************************
+    Display Surveys
+*****************************************************/
+function displaySurveys() {
+
+    var ans = document.getElementById("Surveys");
+    ans.innerHTML = "";
     //Create possible answer
-    for (var i in survey.answers) {
-        answer = survey.answers[i]; 
+    for (var i in currentSurveys) {
+        survey = currentSurveys[i];
+        if (survey.status != "available") continue;
         //Create button an spacer div
         var button = document.createElement("div");
         var spacer = document.createElement("div");
 
         //Set attributes
         spacer.className = "spacer";
-        button.id = answer.id;
+        button.id = survey.surveyID;
         button.className = "button";
-        button.innerHTML = answer.text;
+        button.innerHTML = survey.surveyName;
+        button.style.width = "150px";
+        ans.appendChild(button);
+        ans.appendChild(spacer);
+        button.onclick = function () {
+           //Set this Survey as the current one..
+
+            $("#Surveys").hide();
+            currentSurvey = getSurveyById(this.id);
+            getAvailableQuestions();
+
+        };
+
+
+    }
+
+
+
+
+
+}
+/*****************************************************
+    Get available questions from the Server for the given Survey
+*****************************************************/
+function getAvailableQuestions(survey){
+
+    //Set survey to query
+    if (survey == null || survey == "undefined")
+        survey = currentSurvey.surveyID;
+
+	//Retrieve current questions..
+		
+    $.get(ENDPOINT+"Questions.js?id="+survey, function (data) {	
+
+        // For each question validate if it's new or has changed...
+
+        for(var i in data){
+            var question=data[i];
+            // Validate if it has changed..
+
+            var index = getQuestionIndexById(question.questionID);
+            //Replace..
+
+            if (index >= 0) {
+                //currentQuestions[index] = question;
+            } else {
+                //Add new Question
+                currentQuestions.push(question);
+                if(currentQuestion==null){
+                    currentQuestion = question;
+                    displayQuestion(question);
+                }
+
+            }
+
+        } // End iterating...
+
+        //Remove answers
+        shrinkQuestions();
+		
+    },"json");
+	
+	
+}
+
+/*****************************************************
+    Display a question
+*****************************************************/
+
+function displayQuestion(survey) {
+
+    var question = document.getElementById("Question");
+    //Display the question
+    question.innerHTML = survey.question;
+
+    var ans = document.getElementById("Options");
+    ans.innerHTML = "";
+    //Create possible answer
+    for (var i in survey.options) {
+        answer = survey.options[i]; 
+        //Create button an spacer div
+        var button = document.createElement("div");
+        var spacer = document.createElement("div");
+
+        //Set attributes
+        spacer.className = "spacer";
+        button.id = answer.value;
+        button.className = "button";
+        button.innerHTML = answer.label;
         button.style.width = "150px";
         ans.appendChild(button);
         ans.appendChild(spacer);
@@ -60,8 +185,9 @@ function displaySurvey(survey) {
             //Send this response as the correct one for the survey
 
             var response = {
-                surveyId: survey.questionId,
-                responseId: this.id
+                surveyID: currentSurvey.surveyID,
+                questionID: survey.questionID,
+                responseID: answer.value
 
             };
 
@@ -81,12 +207,76 @@ function displaySurvey(survey) {
 *****************************************************/
 function submitResponse(response) {
 
-    $.post("http://10.172.71.70/ct/ProcessVote.aspx?survey="+response.surveyId+"&answer="+ response.responseId, function (data) {        
-        $("#container").hide();
-        $("#Thanks").show();
+    // Post the Answer to the Server..
+    $.get("ProcessVote.aspx?survey="+response.surveyID+"&question="+response.questionID+"&answer="+ response.responseID, function (data) {        
+
+        var index = getQuestionIndexById(response.questionID);
+
+        if (index >= 0) {
+            currentQuestions[index] = null;
+            shrinkQuestions();
+        }
+        
+
+        nextQuestion(response);
+        
+
     });
 
 }
+
+/*****************************************************
+   Get current Results
+*****************************************************/
+function nextQuestion(response) {
+
+    //Replace
+    if (currentQuestions.length > 0) {
+        $("#container").show();
+        currentQuestion = currentQuestions[0];
+        displayQuestion(currentQuestion);
+    } else {
+
+        waitForQuestionResults(response);
+         
+
+    }
+
+    
+
+}
+
+
+
+/*****************************************************
+   Display waiting div and start pooling for results..
+*****************************************************/
+function waitForQuestionResults(response) {
+
+    // No more questions to show...
+    $("#container").hide();
+    $("#Wait").show();
+
+}
+
+
+/*****************************************************
+   Display waiting div and start pooling for results..
+*****************************************************/
+function checkQuestionResults(response) {
+
+    $.get("Results.aspx", function (data) {
+
+        
+        var question = document.getElementById("Question");
+        //Display the question
+        question.innerHTML = data.question;
+        drawBars(data);
+    },response);
+
+}
+
+
 
 
 /*****************************************************
@@ -94,13 +284,10 @@ function submitResponse(response) {
 *****************************************************/
 function getResults() {
 
-
+      
     
     
-
-
-
-    $.post("http://10.172.71.70/ct/Results.aspx", function (data) {
+    $.get("Results.aspx", function (data) {
 
         var question = document.getElementById("Question");
         //Display the question
