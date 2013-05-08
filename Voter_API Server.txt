@@ -3,7 +3,7 @@
 	Voter API  Version 0.1
 	
 	
-	Current Endpoint :http://10.172.71.29/ct/voter.aspx
+	Current Endpoint :http://200.57.186.57/voter/voter.aspx
 
 ***********************************************************************************/
 
@@ -29,7 +29,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-		http://10.172.71.29/ct/voter.aspx?op=createSurvey&id=1&name=My_Surver&qu1=What%20colour%20is%20the%20sea&qa1_1=blue&qa1_2=red&qa1_3=purple
+		http://200.57.186.57/voter/voter.aspx?op=createSurvey&id=1&name=My_Surver&qu1=What%20colour%20is%20the%20sea&qa1_1=blue&qa1_2=red&qa1_3=purple
 
 	Result: 	
 	Returns the JSON representation of the newly generated survey
@@ -45,7 +45,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=chooseSurvey&id=1
+	http://200.57.186.57/voter/voter.aspx?op=chooseSurvey&id=1
 
 	
 	Result:	
@@ -63,7 +63,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=getSurveys
+	http://200.57.186.57/voter/voter.aspx?op=getSurveys
 
 	
 	Result:	
@@ -81,7 +81,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=getClients&id=1
+	http://200.57.186.57/voter/voter.aspx?op=getClients&id=1
 
 	
 	Result:	
@@ -98,7 +98,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=moveToNextQuestion&id=1
+	http://200.57.186.57/voter/voter.aspx?op=moveToNextQuestion&id=1
 
 	
 	Result:	
@@ -116,7 +116,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=finishSurvey&id=2
+	http://200.57.186.57/voter/voter.aspx?op=finishSurvey&id=2
 
 	
 	Result:	
@@ -135,7 +135,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=getSurvey&id=1&customerId=234343
+	http://200.57.186.57/voter/voter.aspx?op=getSurvey&id=1&customerId=234343
 
 	
 	Result:	
@@ -154,7 +154,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=getQuestionStatus&id=1&questionId=1
+	http://200.57.186.57/voter/voter.aspx?op=getQuestionStatus&id=1&questionId=1
 
 	
 	Result:	
@@ -174,7 +174,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=respondQuestion&id=1&questionId=1&customerId=1234&answerId=2
+	http://200.57.186.57/voter/voter.aspx?op=respondQuestion&id=1&questionId=1&customerId=1234&answerId=2
 
 	
 	Result:	
@@ -200,7 +200,7 @@ Invocation might be performed through a POST or GET request
 	
 	
 	Example:
-	http://10.172.71.29/ct/voter.aspx?op=getQuestionResults&id=1&questionId=1
+	http://200.57.186.57/voter/voter.aspx?op=getQuestionResults&id=1&questionId=1
 
 	
 	Result:	
