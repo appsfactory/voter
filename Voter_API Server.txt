@@ -1,0 +1,209 @@
+Enter file contents here/*********************************************************************************
+  
+	Voter API  Version 0.1
+	
+	
+	Current Endpoint :http://10.172.71.29/ct/voter.aspx
+
+***********************************************************************************/
+
+All invocations to the API should contain the  op  parameter used to specify the operation 
+that needs to be performed.
+
+Invocation might be performed through a POST or GET request
+
+
+
+===  createSurvey ===
+
+	Create a Survey in the server.
+	
+	Params:
+		id=ID for this Survey
+		name=Friendly name for the Survey
+		
+		quXXX
+			Where XXX is the ID of each question. For each question there might be multiple answers
+			
+			qaXXX_YYY  is a possible answer for the given quXXX . XXX is the ID of the question and YYY is the ID of the answer
+	
+	
+	Example:
+		http://10.172.71.29/ct/voter.aspx?op=createSurvey&id=1&name=My_Surver&qu1=What%20colour%20is%20the%20sea&qa1_1=blue&qa1_2=red&qa1_3=purple
+
+	Result: 	
+	Returns the JSON representation of the newly generated survey
+	{"ID":"1","label":"My_Surver","status":"unavailable","questions":[{"ID":"1","label":"What colour is the sea""status":"created","options":[{"ID":"1","label":"blue" },{"ID":"2","label":"red" },{"ID":"3","label":"purple" }]}]}
+
+	
+===  chooseSurvey ===
+
+	Makes available a survey to the clients
+	
+	Params:
+		id=ID for the survey that needs to be available
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=chooseSurvey&id=1
+
+	
+	Result:	
+	Returns the JSON header of the survey (without questions) with the current status as available.
+	
+	{"ID":"1","label":"My_Surver","status":"available"}
+	
+	
+===  getSurveys ===
+
+	Retrieves the current surveys that are registered in the server
+	
+	Params:
+		NONE
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=getSurveys
+
+	
+	Result:	
+	Returns the JSON header of the surveys (without questions) that are registered
+	
+	[{"ID":"1","label":"My_Surver","status":"available"},{"ID":"2","label":"Other Survey","status":"unavailable"}]
+
+
+===  getClients ===
+
+	Retrieves the current number of users that have requested the survey
+	
+	Params:
+		id=ID for the required survey
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=getClients&id=1
+
+	
+	Result:	
+	Returns a JSON structure with one field
+	
+	{"connections":0}
+	
+===  moveToNextQuestion ===
+
+	Makes the next question available and closed the previous
+	
+	Params:
+		id=ID for the required survey
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=moveToNextQuestion&id=1
+
+	
+	Result:	
+	Returns a JSON header for the current question that has been made available
+	
+	{"ID":"1","label":"What colour is the sea""status":"Open"}
+		
+	
+===  finishSurvey ===
+
+	Makes the survey closed
+	
+	Params:
+		id=ID for the required survey
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=finishSurvey&id=2
+
+	
+	Result:	
+	Returns a JSON header for the the survey with the new status
+	
+	{"ID":"2","label":"Other Survey","status":"finished"}	
+	
+
+===  getSurvey ===
+
+	Retrieves a survey information
+	
+	Params:
+		id=ID for the required survey
+		customerID= ID For the client connecting
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=getSurvey&id=1&customerId=234343
+
+	
+	Result:	
+	Returns a JSON object with the Survey. It's up to the server decide wheter to server unavailable surveys
+	
+	{"ID":"1","label":"My_Surver","status":"unavailable","questions":[{"ID":"1","label":"What colour is the sea""status":"created","options":[{"ID":"1","label":"blue" },{"ID":"2","label":"red" },{"ID":"3","label":"purple" }]}]}
+	
+	
+===  getQuestionStatus ===
+
+	Get the status of a question
+	
+	Params:
+		id=ID for the required survey
+		questionId= ID For the question to query
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=getQuestionStatus&id=1&questionId=1
+
+	
+	Result:	
+	Returns a JSON object with the question statu.
+	
+	{"ID":"1","status":"created"}
+	
+===  respondQuestion ===
+
+	Get the status of a question
+	
+	Params:
+		id=ID for the required survey
+		questionId= ID For the question to query
+		customerId= ID For the customer that is answering the question
+		answerId= ID For the selected question
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=respondQuestion&id=1&questionId=1&customerId=1234&answerId=2
+
+	
+	Result:	
+	Returns a JSON object with the result.
+	
+	{status":"Not available"}
+	
+	or 
+	
+	{status":"OK"}
+	
+	{"ID":"1","status":"created"}	
+	
+	
+===  getQuestionResults ===
+
+	Get the results of a question
+	
+	Params:
+		id=ID for the required survey
+		questionId= ID For the question to query
+		answerId= ID For the selected question
+	
+	
+	Example:
+	http://10.172.71.29/ct/voter.aspx?op=respondQuestion&id=1&questionId=1&customerId=1234&answerId=2
+
+	
+	Result:	
+	Returns a JSON object with the result.
+	
+	{"ID":"1","label":"What colour is the sea","results":[{"ID":"1","label":"blue" "value":"0" },{"ID":"2","label":"red" "value":"0" },{"ID":"3","label":"purple" "value":"0	
