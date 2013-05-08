@@ -1,0 +1,27 @@
+<h1>All Stacks</h1>
+
+<table>
+  <tr>
+    <th>Belongs to</th>
+    <th>Question</th>
+    <th>Answer</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @stacks.each do |stack| %>
+  <tr>
+    <td><%= stack.name %></td>
+    <td><%= stack.question %></td>
+    <td><%= stack.answer %></td>
+    <td><%= link_to 'Show', stack %></td>
+    <td><%= link_to 'Edit', edit_stack_path(stack) %></td>
+    <td><%= link_to 'Destroy', stack, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Stack', new_stack_path %>
