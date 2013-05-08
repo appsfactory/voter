@@ -4,7 +4,7 @@ var questionPollingTime = 5000;
 var currentSurvey = new Object();
 var currentQuestion = null;
 var currentQuestions = new Array();
-var ENDPOINT = "http://10.172.71.29/ct/voter.aspx?op=";
+var ENDPOINT = "http://200.57.186.57/voter/voter.aspx?op=";
 
 
 
