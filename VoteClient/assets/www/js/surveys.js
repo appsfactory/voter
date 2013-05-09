@@ -11,13 +11,12 @@ var getMySurveys = function() {
 
 }
 
+function goHome(){
+  window.location="homescreen.html";
+}
+
 function  displayMySurveyList(){
-    var qa = document.getElementById("QuestionAdder");
-    var aa = document.getElementById("AnswerAdder");
-    var sm = document.getElementById("ManageSurveys");
-    qa.style.display="none";
-    sm.style.display="block";
-    aa.style.display="none";
+    display("ManageSurveys");
     var ans = document.getElementById("MySurveyList");
     ans.innerHTML="";
     //Create possible answer
@@ -37,13 +36,10 @@ function  displayMySurveyList(){
         button.onclick = function () {
 
 
-            //Make this servey available online
-            //remove Next Lines!!!!!!!! Debug Purposes only
             var p = this.alt;
             survey=surveys[p];
-            showAllQuestions();
-//////////// Stop remoiviing here
-
+            current_edit=0;
+            startMySurvey();
         };
 
 
@@ -63,6 +59,9 @@ function addNewSurvey(){
 
 
 var createNewSurvey = function(){
+  if(survey.questions.length==0){
+    return;
+  }
   survey.title = document.getElementById("name").value;
   surveys.push(survey);
   displayMySurveyList();
@@ -77,6 +76,9 @@ var createNewSurvey = function(){
 function finishEditAnswers(){
   var q = current_edit;
   var question = survey.questions[q];
+  if(question.answers.length==0){
+    return;
+  }
   question.question = document.getElementById("question").value;
   for(var i=0;i<question.answers.length;i++){
     question.answers[i].answer = document.getElementById("a"+i).value;
@@ -102,6 +104,7 @@ var addNewAnswer = function(){
   var q = current_edit;
   var num = survey.questions[q].answers.length;
   survey.questions[q].question = document.getElementById("question").value;
+
   for(var i=0;i<num;i++){
     survey.questions[q].answers[i]=
               {
@@ -113,18 +116,16 @@ var addNewAnswer = function(){
                 id:num,
                 answer: ""
               }
+  if(survey.questions[q].answers.length>=5){
+    return;
+  }
   survey.questions[q].answers.push(na);
   showAllAnswers(q);
 }
 
 
 function showAllQuestions(){
-  var qa = document.getElementById("QuestionAdder");
-  var aa = document.getElementById("AnswerAdder");
-  var sm = document.getElementById("ManageSurveys");
-  aa.style.display="none";
-  sm.style.display="none";
-  qa.style.display="block";
+  display("QuestionAdder");
 
   var q = document.getElementById("NewQuestions");
   q.innerHTML="";
@@ -145,21 +146,102 @@ function showAllQuestions(){
 
 function showAllAnswers(q){
   var question = survey.questions[q];
-  console.log(q+":"+survey.questions.length);
-  var qa = document.getElementById("QuestionAdder");
-  var aa = document.getElementById("AnswerAdder");
-  var sm = document.getElementById("ManageSurveys");
-  qa.style.display="none";
-  sm.style.display="none";
-  aa.style.display="block";
+  display("AnswerAdder");
   document.getElementById("question").value=question.question;
   var na = document.getElementById("NewAnswers");
   na.innerHTML="";
   for(var i=0;i<question.answers.length;i++){
+    var ans=document.createElement("p");
+    var br=document.createElement("br");
+    var node=document.createTextNode((i+1)+". ");
+    ans.appendChild(node);
+    na.appendChild(node);
     var answer = document.createElement("input");
     answer.id = "a"+i;
     answer.type = "text";
     answer.value = question.answers[i].answer;
     na.appendChild(answer);
+    na.appendChild(br);
   }
+}
+
+function returnToSurvey(){
+  survey=null;
+  current_edit=0;1;
+	display("ManageSurveys");
+}
+
+
+function display(div){
+  document.getElementById("StartSurvey").style.display="none";
+  document.getElementById("Question").style.display="none";
+  document.getElementById("EndSurvey").style.display="none";
+  document.getElementById("QuestionAdder").style.display="none";
+  document.getElementById("AnswerAdder").style.display="none";
+  document.getElementById("ManageSurveys").style.display="none";
+
+  document.getElementById(div).style.display="block";
+}
+
+
+function startMySurvey(){
+  // TODO Tell server to accept clients
+  display("StartSurvey");
+  document.getElementById("surveyname").innerHTML=survey.title;
+
+  //TODO get how many have connected
+
+
+}
+
+function gotoNextQuestion(){
+  current_edit+=1;
+  if(current_edit>=survey.questions.length){
+    viewEndSurvey();
+  }else{
+    viewQuestion();
+  }
+}
+
+function viewQuestion(){
+  document.getElementById("Answers").innerHTML="";
+  display("Question");
+  document.getElementById("questionname").innerHTML=survey.questions[current_edit].question;
+  document.getElementById("start").innerHTML="Start Poll";
+  document.getElementById("start").style.display="block";
+  for(var i=0;i<survey.questions[current_edit].answers.length;i++){
+    var ans=document.createElement("p");
+    var br=document.createElement("br");
+    var node=document.createTextNode((i+1)+". "+ survey.questions[current_edit].answers[i].answer);
+    ans.appendChild(node);
+    document.getElementById("Answers").appendChild(node);
+    document.getElementById("Answers").appendChild(br);
+  }
+
+  drawGraph(sampledata, "QuestionGraph", 0);
+
+
+}
+
+function toggleAccepting(){
+
+  if(document.getElementById("start").innerHTML=="Start Poll"){
+    document.getElementById("start").innerHTML="Stop Poll";
+    document.getElementById("next").style.display="none";
+  }else{
+    document.getElementById("start").style.display="none";
+    document.getElementById("next").style.display="block";
+  }
+  //TODO tell server to accept answers and start accepting live feedback to update graph
+
+
+}
+
+
+function viewEndSurvey(){
+  //display results
+  document.getElementById("surveyname2").innerHTML=survey.title;
+  display("EndSurvey");
+
+  drawGraph(sampledata,"SurveyGraph",1);
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="../css/StyleSheet.css" />
+        <title>Create Account</title>
+      <script src="../js/user.js"></script>
+
+    </head>
+      <body onload="resetNewLogin()">
+          <h1>Create an Account</h1>
+          <form id="login" action="JavaScript:createUser()">
+            <p>Username:</p>
+            <input type="text" id="username"><br>
+            <p>Password:</p>
+            <input type="password" id="password"><br>
+            <p>Confirm Password:</p>
+            <input type="password" id="passwordc"><br>
+            <button type="button" class="button" onclick="cancelCreate">Cancel</button>
+            <input class="button" type="submit" value="Login">
+        </form>
+        <p id="message"></p>
+    </body>
+</html>
