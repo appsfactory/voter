@@ -1,0 +1,33 @@
+<h1>Listing stacks</h1>
+
+<table>
+  <tr>
+    <th>Part of</th>
+    <th>Question</th>
+    <th>Correct Answer</th>
+    <th>Incorrect Answers</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @stacks.each do |stack| %>
+<% @choices =  stack.choices %>
+  <tr>
+    <td><%= stack.name %></td>
+    <td><%= stack.question %></td>
+    <td><%= stack.answer %></td>
+    <td><% parseChoices(@choices).each do |choice| %>
+    <br /><%= choice %>
+    <% end %>
+    </td>
+    <td><%= link_to 'Show', stack %></td>
+    <td><%= link_to 'Edit', edit_stack_path(stack) %></td>
+    <td><%= link_to 'Destroy', stack, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Stack', new_stack_path %>
