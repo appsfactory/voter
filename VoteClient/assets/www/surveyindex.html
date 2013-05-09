@@ -6,7 +6,9 @@
         <title>Survey App</title>
         <script src="js/user.js"></script>
     </head>
+    
       <body onload="resetLogin()">
+      <div id="container">
           <h1>Survey <a href="admin_ui/create_account.html">Create Account</a></h1>
           <form id="login" action="JavaScript:login()">
             <p>Username:</p>
@@ -17,5 +19,7 @@
             <input class="button" type="submit" value="Login">
         </form>
         <p id="message">Note: You must log in to create a survey</p>
+        </div>
     </body>
+    
 </html>

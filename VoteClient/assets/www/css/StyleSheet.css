@@ -63,10 +63,9 @@
 #container {
 
         margin: auto; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;
-        width:400px;
-		border:#009 dashed;
-		background-image:url(../img/button_bg.jpg);
-		
+        width:100%;
+		background-image:url(../img/bg2.gif);
+		background-size:100%;
         /**
         background: -webkit-gradient(linear, left top, left bottom, from(#0f0f0f), to(#7d7373));
         background: -webkit-linear-gradient(top, #0f0f0f, #7d7373);
@@ -74,8 +73,8 @@
         background: -ms-linear-gradient(top, #0f0f0f, #7d7373);
         background: -o-linear-gradient(top, #0f0f0f, #7d7373);
         */
-        height:400px;
-
+        height:100%;
+		
 }
 
 
