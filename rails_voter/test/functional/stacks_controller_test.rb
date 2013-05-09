@@ -18,7 +18,7 @@ class StacksControllerTest < ActionController::TestCase
 
   test "should create stack" do
     assert_difference('Stack.count') do
-      post :create, stack: { answer: @stack.answer, id: @stack.id, name: @stack.name, question: @stack.question }
+      post :create, stack: { answer: @stack.answer, choices: @stack.choices, id: @stack.id, name: @stack.name, question: @stack.question }
     end
 
     assert_redirected_to stack_path(assigns(:stack))
@@ -35,7 +35,7 @@ class StacksControllerTest < ActionController::TestCase
   end
 
   test "should update stack" do
-    put :update, id: @stack, stack: { answer: @stack.answer, id: @stack.id, name: @stack.name, question: @stack.question }
+    put :update, id: @stack, stack: { answer: @stack.answer, choices: @stack.choices, id: @stack.id, name: @stack.name, question: @stack.question }
     assert_redirected_to stack_path(assigns(:stack))
   end
 

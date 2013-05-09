@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Id:</b>
-  <%= @stack.id %>
-</p>
-
-<p>
   <b>Name:</b>
   <%= @stack.name %>
 </p>
@@ -20,6 +15,17 @@
   <%= @stack.answer %>
 </p>
 
+<p>
+  <b>Choices:</b>
+
+  <% parseChoices(@stack.choices).each do |choice| %>
+  <br /><%= choice %>
+  <% end %>
+  
+</p>
+
 
 <%= link_to 'Edit', edit_stack_path(@stack) %> |
 <%= link_to 'Back', stacks_path %>
+
+
