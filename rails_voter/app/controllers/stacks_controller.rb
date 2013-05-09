@@ -2,7 +2,7 @@ class StacksController < ApplicationController
     # GET /stacks
     # GET /stacks.json
     def index
-        @stacks = Stack.all
+        @stacks = Stack.order("name").all
         
         respond_to do |format|
             format.html # index.html.erb
@@ -36,6 +36,16 @@ class StacksController < ApplicationController
     def edit
         @stack = Stack.find(params[:id])
     end
+
+    # GET /stacks/1/present
+    def present
+        @stack = Stack.find(params[:stack_id])
+    end 
+
+    # GET /stacks/1/submitstack
+    def submitstack
+
+    end 
     
     # POST /stacks
     # POST /stacks.json

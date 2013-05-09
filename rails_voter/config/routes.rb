@@ -1,8 +1,12 @@
 Voter::Application.routes.draw do
-  resources :stacks
+  resources :stacks do
+    get "present"
+    post "submitstack"
+  end
 
 
   get "home/index"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

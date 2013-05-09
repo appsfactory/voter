@@ -34,6 +34,12 @@ class StacksControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should get present" do
+    get :present
+    assert_response :success
+  end
+
+
   test "should update stack" do
     put :update, id: @stack, stack: { answer: @stack.answer, choices: @stack.choices, id: @stack.id, name: @stack.name, question: @stack.question }
     assert_redirected_to stack_path(assigns(:stack))
