@@ -4,6 +4,7 @@
     <title>Survey</title>
     <link href="css/StyleSheet.css" type="text/css" rel="stylesheet"></link>
     <script src="js/jquery-1.8.3.min.js"></script>
+        <script src="js/jGraph.js"></script>
     <script src="js/Prototype.js"></script>
     
 
@@ -19,12 +20,16 @@
     </div>
 
 
-    <div id="Thanks">
+    <div id="Thanks"  >
             Thanks for answering our survey.
+        
+        <select id="graphSelect" onchange="showGraph()"></select>
+        <canvas id="canvas"></canvas>
+
         </div>
 
     <div id="Wait">
-             <canvas id="canvas" style="display:none"></canvas>
+             
              <div id="Waiting">Please wait for other participants to submit their answers..</div>
         </div>
 </body>

@@ -5,6 +5,8 @@ using System.Web;
 /// <summary>
 /// Summary description for Survey
 /// </summary>
+/// 
+[Serializable()]
 public class Survey
 {
     public String name;

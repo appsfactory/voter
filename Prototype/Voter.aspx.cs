@@ -9,12 +9,52 @@ public partial class Results : System.Web.UI.Page
     //Declare a  dictionary of surveys
     public static Dictionary<String, Survey>  surveys = new Dictionary<String, Survey>();
 
+    private void loadSurvey()
+    {
+        lock (surveys)
+        {
+            try
+            {
+                System.Runtime.Serialization.Formatters.Binary.BinaryFormatter bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
+                using (System.IO.Stream s = new System.IO.FileStream(Server.MapPath(".") + "/surveys.ser", System.IO.FileMode.Open ))
+                {
+
+                    surveys = (Dictionary<String, Survey>)bf.Deserialize(s);
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+                
+            }
+
+        }
+    }
+
+
+    private void saveSurvey()
+    {
+        lock (surveys)
+        {
+            System.Runtime.Serialization.Formatters.Binary.BinaryFormatter bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            using (System.IO.Stream s = new System.IO.FileStream(Server.MapPath(".") + "/surveys.ser", System.IO.FileMode.Create))
+            {
+                bf.Serialize(s, surveys);
+            }
+        }
+     }
     protected void Page_Load(object sender, EventArgs e)
     {
 
+        
         String op = Request["op"];
+        if (op == null) return;
 
+        loadSurvey();
         switch (op)
         {
             case "createSurvey":createSurvey();
@@ -59,8 +99,8 @@ public partial class Results : System.Web.UI.Page
 
 
         }
-        
 
+        saveSurvey();
     }
 
 
@@ -70,6 +110,7 @@ public partial class Results : System.Web.UI.Page
         String ID = Request["id"];
 
         writeHeaders();
+        if (!surveys.ContainsKey(ID)) return;
         Survey s = surveys[ID];
         if (s != null)
         {
@@ -106,6 +147,7 @@ public partial class Results : System.Web.UI.Page
         String ID = Request["id"];
 
         writeHeaders();
+        if (!surveys.ContainsKey(ID)) return;
         Survey s = surveys[ID];
         if (s != null)
         {
@@ -123,6 +165,7 @@ public partial class Results : System.Web.UI.Page
         String aID = Request["answerId"];
 
         writeHeaders();
+        if (!surveys.ContainsKey(ID)) return;
         Survey s = surveys[ID];
         if (s != null)
         {
@@ -151,6 +194,7 @@ public partial class Results : System.Web.UI.Page
         String aID = Request["answerId"];
 
         writeHeaders();
+        if (!surveys.ContainsKey(ID)) return;
         Survey s = surveys[ID];
         if (s != null)
         {
@@ -190,6 +234,7 @@ public partial class Results : System.Web.UI.Page
         String ID = Request["id"];
 
         writeHeaders();
+        if (!surveys.ContainsKey(ID)) return;
         Survey s = surveys[ID];
         if (s != null)
         {
@@ -227,6 +272,7 @@ public partial class Results : System.Web.UI.Page
         
 
         writeHeaders();
+        if (!surveys.ContainsKey(ID)) return;
         Survey s = surveys[ID];
         if (s != null)
         {
@@ -250,6 +296,7 @@ public partial class Results : System.Web.UI.Page
         String ID = Request["id"];
 
         writeHeaders();
+        if (!surveys.ContainsKey(ID)) return;
         Survey s = surveys[ID];
         if (s != null)
         {

@@ -5,7 +5,8 @@ using System.Web;
 /// <summary>
 /// Summary description for Question
 /// </summary>
-public class Question
+[Serializable()] 
+public class Question 
 {
     public String label;
     public String ID;

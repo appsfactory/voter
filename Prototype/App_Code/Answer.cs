@@ -5,6 +5,7 @@ using System.Web;
 /// <summary>
 /// Summary description for Answer
 /// </summary>
+[Serializable()]
 public class Answer
 {
     public String ID;
@@ -38,7 +39,7 @@ public class Answer
         System.Text.StringBuilder sb = new System.Text.StringBuilder();
         Answer s = this;
         sb.Append("{\"ID\":\"" + s.ID + "\",");
-        sb.Append("\"label\":\"" + s.label + "\" ");
+        sb.Append("\"label\":\"" + s.label + "\", ");
         sb.Append("\"value\":\"" + s.clients.Count  + "\" ");
         sb.Append("}");
 

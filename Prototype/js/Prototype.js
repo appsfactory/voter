@@ -105,7 +105,8 @@ function displaySurveys() {
 
             $.post(ENDPOINT + "getSurvey&id=" + this.id, function (data) {
            
-                currentSurvey=data;
+                currentSurvey = data;
+                getGraphDropDown();
                 getAvailableQuestions(currentSurvey);
 
             }, "json");
@@ -152,7 +153,8 @@ function getAvailableQuestions(survey){
                 currentQuestions.push(question);
                 if(currentQuestion==null){
                     currentQuestion = question;
-                    displayQuestion(question);
+                    //displayQuestion(question);
+					nextQuestion();
                 }
 
             }
@@ -189,7 +191,8 @@ function displayQuestion(survey) {
 
         //Set attributes
         spacer.className = "spacer";
-        button.id = answer.value;
+        button.id = answer.ID;
+		button.alt=answer.ID;
         button.className = "button";
         button.innerHTML = answer.label;
         button.style.width = "150px";
@@ -201,7 +204,7 @@ function displayQuestion(survey) {
             var response = {
                 surveyID: currentSurvey.ID,
                 questionID: survey.ID,
-                responseID: answer.ID
+                responseID: this.alt
 
             };
 
@@ -215,15 +218,55 @@ function displayQuestion(survey) {
 
 
 }
-
+var randomID= parseInt(Math.random()*1000);
 /*****************************************************
     Send response to the server
 *****************************************************/
 function getClientID() {
 
-    return "ID";
+    return "ID"+randomID;
 
 }
+
+
+/*****************************************************
+    Creates a new drop down selector to visualize
+    results of questions..
+*****************************************************/
+function getGraphDropDown() {
+
+    var dropdown = document.getElementById("graphSelect");//;document.createElement("select");
+    dropdown.innerHTML = "";
+
+    //Add an option for each question in the current survey
+
+    for (var i in currentSurvey.questions) {
+
+        var opt = document.createElement("option");
+        var q= currentSurvey.questions[i];
+        opt.text = q.label;
+        opt.value = q.ID;
+        dropdown.add(opt, null);
+        if (i == 0) {
+            opt.selected = "selected";
+            showGraph();
+
+            }
+    }
+
+
+
+}
+
+function showGraph() {
+    var dropdown = document.getElementById("graphSelect");
+    
+    $.post(ENDPOINT + "getQuestionResults&id=" + currentSurvey.ID + "&questionId=" + dropdown.options[dropdown.selectedIndex].value, function (data) {
+
+        drawBars(data.results);
+    },"json");
+}
+
 /*****************************************************
     Send response to the server
 *****************************************************/
@@ -242,10 +285,13 @@ function submitResponse(response) {
             nextQuestion(currentQuestion);
         } else {
 
+
+
             //End 
             $("#container").hide();
+            getGraphDropDown();
             $("#Thanks").show();
-
+            
         }
 
         
@@ -285,7 +331,7 @@ function nextQuestion() {
                 
 
             }
-        });
+        },"json");
 
     }, questionPollingTime);
 
@@ -339,14 +385,16 @@ function getResults() {
 function drawPie(data) {
 
     //Set a different color foreach
-    var colors = ["#69D2E7", "#E0E4CC", "#F0E4CD"];
+    var colors = ["#69D2E7", "#E0E4CC", "#F0E4CD", "#69D2E7", "#E0E4CC", "#F0E4CD"];
 
     for (var i in data.answers) {
-        data.answers[i].color = colors[i];
+        data[i].color = colors[i];
     }
 
     //var myPie = new Chart(document.getElementById("canvas").getContext("2d")).Pie(data.answers);
-    var myPie = new Chart(document.getElementById("canvas").getContext("2d")).Pie(data.answers);
+    var myPie = new Chart(document.getElementById("canvas").getContext("2d")).Pie(data);
+
+    $("#canvas").show();
 
 }
 function drawBars(data) {
@@ -366,10 +414,10 @@ function drawBars(data) {
 
     };
 
-    for (var i in data.answers) {
+    for (var i in data) {
         
-        barChartData.labels.push(data.answers[i].label);
-        barChartData.datasets[0].data.push( data.answers[i].value       );
+        barChartData.labels.push(data[i].label);
+        barChartData.datasets[0].data.push( data[i].value       );
     }
 
 
