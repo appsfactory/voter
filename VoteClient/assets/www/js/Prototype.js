@@ -15,7 +15,7 @@ function getSurvey() {
     //Display the question
     var survey = {
         questionId: 1,
-        question: "What colour is the sky?",
+        question: "What colour is the sky? or you can just leave it!",
 
         answers: [
             { id: 1, text: "It's blue" },
@@ -53,9 +53,10 @@ function displaySurvey(survey) {
         button.id = answer.id;
         button.className = "button";
         button.innerHTML = answer.text;
-        button.style.width = "150px";
+        button.style.width = "98%";
+	
         ans.appendChild(button);
-        ans.appendChild(spacer);
+       	ans.appendChild(spacer);
         button.onclick = function () {
             //Send this response as the correct one for the survey
 
