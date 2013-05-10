@@ -3,6 +3,8 @@
 <head>
     <title>Manage Surveys</title>
     <link href="../css/StyleSheet.css" type="text/css" rel="stylesheet"></link>
+     <script src="../js/jquery-1.8.3.min.js"></script>  
+  <script src="../js/serverComm.js"></script>
   <script src="../js/surveys.js"></script>
   <script src="../js/grapher.js"></script>
   <script src="../js/jGraph.js"></script>
@@ -20,12 +22,13 @@
     	<h1>Manage Surveys</h1>
     	<br>
     
-    	<button type="button" class="button" onclick="addNewSurvey()">Add New Survey</button>
+    	<button type="button" class="button" onclick="addNewSurvey()">Add New Survey</button><br><br>
     	<div id="MySurveyList">
 			
     	</div>
     	<div class="push"></div>
     </div>
+    <br>
     <div class="floor">
     	<button class="button" type="button" onclick="goHome()">Back</button>
     </div>
@@ -52,6 +55,7 @@
       <div id="NewAnswers">
 
       </div>
+      <br>
       <button type="button" class="button" onclick="addNewAnswer()">Add Answer</button>
 
       <button type="button" class="button" onclick="finishEditAnswers()">Add Question</button>
