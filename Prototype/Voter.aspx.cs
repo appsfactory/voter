@@ -97,13 +97,19 @@ public partial class Results : System.Web.UI.Page
 
                 break;
 
+            case "registerUser": registerUser();
+
+                break;
 
         }
 
         saveSurvey();
     }
 
+    void registerUser()
+    {
 
+    }
 
     void moveToNextQuestion()
     {
@@ -425,10 +431,12 @@ public partial class Results : System.Web.UI.Page
         Response.ContentType = "application/json";
         Random r = new Random();
         Response.Clear();
+         /*
         Response.Headers.Add("Access-Control-Allow-Origin", Request.UserHostAddress);
         Response.Headers.Add("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
         Response.Headers.Add("Access-Control-Max-Age", "1000");
         Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type");
+          * */
 
     }
 }
