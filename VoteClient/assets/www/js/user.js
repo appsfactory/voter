@@ -57,7 +57,8 @@ function cancelLogin(){
   window.location = "client_ui.html";
 }
 
+
 function cancelCreate(){
   resetNewLogin();
-  window.location = "../surveyindex.html";
+  windo.location = "../surveyindex.html";
 }

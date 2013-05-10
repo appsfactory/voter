@@ -209,7 +209,7 @@ if(canvas=="undefined" ||canvas==null)canvas="QuestionGraph";
     }
 
 
-    var myLine = new Chart(document.getElementById("QuestionGraph").getContext("2d")).Bar(barChartData);
+    var myLine = new Chart(document.getElementById(canvas).getContext("2d")).Bar(barChartData);
 
 
 
