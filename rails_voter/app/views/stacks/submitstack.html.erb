@@ -1,1 +1,50 @@
-Test
+<h1>Results for <%= @title %></h1>
+
+<% 
+# Copy all questions and answers of Stack to Vote 
+# Create a new vote row if one does not exist already 
+@stacks.each do |stack|
+	if params[stack.question] != nil  
+		Vote.where(:name => @title, :question => stack.question, :answer => stack.answer, :counter => 0).first_or_create
+		parseChoices(stack.choices).each do |choice| 
+			Vote.where(:name => @title, :question => stack.question, :answer => choice, :counter => 0).first_or_create
+		end
+
+		# Retrieve question
+		@question = stack.question
+
+		# Retrieve selected answer
+		@answers = Vote.where(:name => @title)
+		@answers.each do |answer|
+			@theQuestion = answer.question
+			@theAnswer = params[@theQuestion]
+		end
+			# Update the counters for the selected answers
+			@vote = Vote.where(:name => @title, :question => @question, :answer => @theAnswer).first
+			if @vote != nil 
+				# Increase the counter by 1
+				@vote.counter += 1
+				@vote.save()
+			end
+%> 
+ 	
+		<%= stack.question %>
+
+		<ul>
+			<% @answerVote = Vote.where(:name => @title, :question => @question, :answer => stack.answer).first %>
+			<li><%= stack.answer %> - <%= @answerVote.counter %></li>
+			<% 
+			parseChoices(stack.choices).each do |choice|
+			@choiceVote = Vote.where(:name => @title, :question => @question, :answer => choice).first 
+			%>
+			<li><%= choice %> - <%= @choiceVote.counter %></li>
+			<% end %>
+		</ul>
+
+		You voted: <%= @theAnswer %>
+		<br />Correct answer: <%= stack.answer %>
+		<br /><br />
+
+	<% end %>
+<% end %>
+

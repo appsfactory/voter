@@ -44,7 +44,10 @@ class StacksController < ApplicationController
 
     # GET /stacks/1/submitstack
     def submitstack
+        @votes = Vote.order("name").all
 
+        @stacks = Stack.where(:name=>params[:stackName])
+        @title = params[:stackName]
     end 
     
     # POST /stacks
