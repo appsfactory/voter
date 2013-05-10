@@ -22,10 +22,12 @@
 
 
 .button {
+	background-color:#A5A5A5;
 	width:100%;
 	font-size:18px;
 	height: 2.75em;
 	text-align:center;
+	border:0px;
 	display:inline-block;
 	color:white;
 	font-family:Arial;
@@ -49,7 +51,7 @@ font-size:14px;
 
 h1{
 	color:white;
-	font-size:44px;
+	font-size:40px;
 }
 
 p{
@@ -66,13 +68,23 @@ html{
 		padding-right:5%;
         margin: auto; position: relative; top: 0px; bottom: 0px; left: 0px; right: 0px;
         width:90%;
-		background-image:url(../img/darkdenim3.png);
+		background-image:url(../img/grey_wash_wall.png);
         height:100%;
 }
 
 .rightalign{
 	text-align: right;
+	float: right;
 }
 .centeralign{
 	text-align: center;
+}
+
+.bigassbutton{
+	height:5em;
+	font-size:24px;
+}
+
+.centervert{
+	vertical-align:center;
 }
