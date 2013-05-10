@@ -1,14 +1,19 @@
 Voter::Application.routes.draw do
-#  get "users/new"
-  get "users/index"
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy'
 
-  resources :stacks
-  resources :users do
-     get 'newbyid'
-     post 'createbyid'
+  resources :stacks do
+    get "present"
+    post "submitstack"
   end
 
+  get 'users/newbyid'
+  post 'users/createbyid'
+  resources :users
+
   get "home/index"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
