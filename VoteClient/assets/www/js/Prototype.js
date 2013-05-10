@@ -417,7 +417,7 @@ function drawBars(data) {
     for (var i in data) {
         
         barChartData.labels.push(""+data[i].label);
-        barChartData.datasets[0].data.push( data[i].value       );
+        barChartData.datasets[0].data.push( parseInt(data[i].value )      );
     }
 
 
