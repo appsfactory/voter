@@ -41,7 +41,10 @@ function  displayMySurveyList(){
             var p = this.alt;
             survey=surveys[p];
             current_edit=0;
+            
+            getSurveyObject(function(){
             startMySurvey();
+          });
         };
 
 

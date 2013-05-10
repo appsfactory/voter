@@ -109,6 +109,23 @@ function getAllSurveys() {
 }
 
 
+/*****************************************************
+    Get survey object
+*****************************************************/
+function getSurveyObject(myfun) {
+
+    $.post(SERVER_ENDPOINT + "getSurvey&id"+encodeURIComponent(survey.id), function (data) {
+        survey = data;
+        survey.id=survey.ID;
+       	survey.title=survey.label;
+         myfun();
+    },"json");
+
+
+   
+}
+
+
 var usercounttimer=0;
 /*****************************************************
     Enables a Survey
@@ -128,7 +145,7 @@ function enableSurvey() {
        	
        	
       },3000);
-       
+      
 
     },"json");
 
@@ -137,6 +154,20 @@ function enableSurvey() {
 
    
 }
+
+function enableQuestion(){
+	
+	
+	 $.post(SERVER_ENDPOINT + "moveToNextQuestion&id="+encodeURIComponent(survey.id), function (data) {
+       
+
+       
+
+    },"json");
+    
+    
+    
+	}
 
 
 /*****************************************************
