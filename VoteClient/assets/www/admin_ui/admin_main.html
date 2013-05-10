@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Manage Surveys</title>
+    <link href="../css/StyleSheet.css" type="text/css" rel="stylesheet"></link>
+  <script src="../js/surveys.js"></script>
+  <script src="../js/grapher.js"></script>
+  <script src="../js/jGraph.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+//do things
+  getMySurveys();
+},false);
+  </script>
+
+</head>
+<body>
+<div id="container">
+  <div id="ManageSurveys">
+    <h1>Manage Surveys</h1>
+    <br>
+    <button type="button" class="button" onclick="goHome()">Back</button>
+    <button type="button" class="button" onclick="addNewSurvey()">Add New Survey</button>
+    <div id="MySurveyList">
+
+    </div>
+  </div>
+
+  <div id="QuestionAdder" style.display=none>
+    <h1>Create Survey</h1>
+    <p>Survey Name: <input type="text" name="name" id=name></p>
+    <form>
+      <button type="button" class="button" onclick="addNewQuestion()">Add Question</button>
+      <div id="NewQuestions">
+
+      </div>
+      <button type="button" class="button" onclick="createNewSurvey()">Add Survey</button>
+    </form>
+  </div>
+
+  <div id="AnswerAdder" style.display=hidden>
+    <h1>Edit Question</h1>
+    <br>
+  <form>
+    <p>Question : <input type="text" name="question" id=question></p>
+
+      <div id="NewAnswers">
+
+      </div>
+      <button type="button" class="button" onclick="addNewAnswer()">Add Answer</button>
+
+      <button type="button" class="button" onclick="finishEditAnswers()">Add Question</button>
+  </form>
+</div>
+
+  <div id="StartSurvey">
+    <h1>Start Survey</h1>
+    <p id="surveyname"></p>
+    <br>
+    <p id="numconnected">Number of clients connected: 0</p>
+
+    <button type="button" class="button" onclick="returnToSurvey()">Cancel</button>
+    <button type="button" class="button" onclick="viewQuestion()">Enter</button>
+  </div>
+
+  <div id="Question">
+    <h1 id="questionname">Question</h1>
+
+    <div id="Answers">
+    </div>
+    <br>
+    <canvas id="QuestionGraph">
+
+    </canvas>
+    <p id="numanswered">Number of responses: 0</p>
+    <button id="start" type="button" class="button" onclick="toggleAccepting()">Start Poll</button>
+    <button id="next" type="button" class="button" onclick="gotoNextQuestion()">Next</button>
+  </div>
+
+
+  <div id="EndSurvey">
+    <h1>Survey Results</h1>
+    <p id=surveyname2></p>
+
+    <canvas id="SurveyGraph">
+    </canvas>
+    <br>
+    <button type="button" class="button" onclick="returnToSurvey()">Done</button>
+  </div>
+
+</div>
+</body>
+</html>
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="css/StyleSheet.css" />
+        <title>Survey App</title>
+        <script src="js/user.js"></script>
+    </head>
+    
+      <body onload="resetLogin()">
+      <div id="container">
+          <h1>Survey <a href="admin_ui/create_account.html">Create Account</a></h1>
+          <form id="login" action="JavaScript:login()">
+            <p>Username:</p>
+            <input type="text" id="username"><br>
+            <p>Password:</p>
+            <input type="password" id="password"><br>
+            <button type="button" class="button" onclick="cancelLogin()">Skip</button>
+            <input class="button" type="submit" value="Login">
+        </form>
+        <p id="message">Note: You must log in to create a survey</p>
+        </div>
+    </body>
+    
+</html>
