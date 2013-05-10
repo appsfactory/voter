@@ -118,6 +118,14 @@ function getSurveyObject(myfun) {
         survey = data;
         survey.id=survey.ID;
        	survey.title=survey.label;
+       	
+       	for(var i in survey.questions){
+       			
+       			var q=survey.questions[i];
+       			
+       			q.question=q.label;
+       	}
+       	
          myfun();
     },"json");
 

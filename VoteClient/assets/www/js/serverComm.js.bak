@@ -114,10 +114,16 @@ function getAllSurveys() {
 *****************************************************/
 function getSurveyObject(myfun) {
 
-    $.post(SERVER_ENDPOINT + "getSurvey&id"+encodeURIComponent(survey.id), function (data) {
+    $.post(SERVER_ENDPOINT + "getSurvey&id="+encodeURIComponent(survey.id), function (data) {
         survey = data;
         survey.id=survey.ID;
        	survey.title=survey.label;
+       	
+       	for(var i in survey.questions){
+       			
+       			
+       	}
+       	
          myfun();
     },"json");
 
