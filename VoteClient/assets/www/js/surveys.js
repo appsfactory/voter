@@ -198,9 +198,6 @@ function startMySurvey(){
   display("StartSurvey");
   document.getElementById("surveyname").innerHTML=survey.title;
 
-  
-
-
 }
 
 function gotoNextQuestion(){
@@ -228,8 +225,6 @@ function viewQuestion(){
   }
 
   drawGraph(sampledata, "QuestionGraph", 0);
-
-
 }
 
 function toggleAccepting(){
