@@ -1,0 +1,6 @@
+== rails_voter
+What you can do so far:
+- store administrator accounts that can create, alter, and delete test and quiz sets called "stacks"
+- these stacks contain the name of the stack, questions, answers, and incorrect answers
+- participate in a stack
+

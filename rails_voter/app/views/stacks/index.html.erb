@@ -1,0 +1,55 @@
+<style>
+table td {vertical-align: top; width: 150px;}
+
+</style>
+
+<h1>Listing Stacks</h1>
+
+<div style="border: 1px solid #000;">
+<% 
+prevStackName = nil
+currStackName = nil
+%>
+
+
+<% @stacks.each do |stack| %>
+    <table>
+<%
+    @choices =  stack.choices 
+
+    prevStackName = currStackName
+    currStackName = stack.name 
+
+    if (prevStackName != currStackName)
+%>
+        <tr>
+            <td><strong>Stack Name</strong>: <%= link_to stack.name, stack_present_path(stack) %></td>
+        </tr>
+
+         <tr>
+        <td><strong>Question</strong></td>
+        <td><strong>Correct Answer</strong></td>
+        <td><strong>Incorrect Answers</strong></td>
+        <td><strong>Actions</strong></td>
+      </tr>
+
+    <% end %>
+
+      <tr>
+        <td><%= stack.question %></td>
+        <td><%= stack.answer %></td>
+        <td><% parseChoices(@choices).each do |choice| %>
+        <%= choice %><br />
+        <% end %>
+        </td>
+        <td><%= link_to 'Edit', edit_stack_path(stack) %> <%= link_to 'Delete', stack, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+  </table> 
+<% end %> 
+</div> 
+
+<br />
+
+<%= link_to 'New Stack', new_stack_path %>
+
