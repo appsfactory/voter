@@ -167,7 +167,6 @@ function showAllAnswers(q){
     answer.id = "a"+i;
     answer.type = "text";
     answer.value = question.answers[i].answer;
-    answer.className="textbox needspace";
     na.appendChild(answer);
     na.appendChild(br);
   }
@@ -175,7 +174,7 @@ function showAllAnswers(q){
 
 function returnToSurvey(){
   survey=null;
-  current_edit=0;
+  current_edit=0;1;
 	display("ManageSurveys");
 }
 
@@ -227,7 +226,7 @@ function viewQuestion(){
     document.getElementById("Answers").appendChild(br);
   }
 
-  drawGraph(sampledata, "QuestionGraph", 0);
+   showAdminGraph() ;
 
 
 }
@@ -237,14 +236,15 @@ function toggleAccepting(){
   if(document.getElementById("start").innerHTML=="Start Poll"){
     document.getElementById("start").innerHTML="Stop Poll";
     document.getElementById("next").style.display="none";
+    setQuestionStatus("open");
     
     
   }else{
     document.getElementById("start").style.display="none";
     document.getElementById("next").style.display="block";
+    setQuestionStatus("closed");
   }
-  //TODO tell server to accept answers and start accepting live feedback to update graph
-
+  
 
 }
 
@@ -254,5 +254,46 @@ function viewEndSurvey(){
   document.getElementById("surveyname2").innerHTML=survey.title;
   display("EndSurvey");
 
-  drawGraph(sampledata,"SurveyGraph",1);
+	getAdminGraphDropDown();
+
+  //drawGraph(sampledata,"SurveyGraph",1);
+}
+
+
+/*****************************************************
+    Creates a new drop down selector to visualize
+    results of questions..
+*****************************************************/
+function getAdminGraphDropDown() {
+
+		var surveyname2=document.getElementById("surveyname2");
+		var parent=document.getElementById("EndSurvey");
+		surveyname2.innerHTML=survey.title;		
+    var dropdown = document.getElementById("graphSelect");//;
+    if(dropdown==null){
+    			dropdown=document.createElement("select");
+    			dropdown.id="graphSelect";
+    			dropdown.onchange=showAdminDropDownGraph;
+    			parent.insertBefore(dropdown,surveyname2);
+    	}
+    dropdown.innerHTML = "";
+
+    //Add an option for each question in the current survey
+
+    for (var i in survey.questions) {
+
+        var opt = document.createElement("option");
+        var q= survey.questions[i];
+        opt.text = q.label;
+        opt.value = q.ID;
+        dropdown.add(opt, null);
+        if (i == 0) {
+            opt.selected = "selected";
+            showAdminDropDownGraph();
+
+            }
+    }
+
+
+
 }
