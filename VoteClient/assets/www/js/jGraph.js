@@ -334,7 +334,7 @@ window.Chart = function(context){
 			scaleFontStyle : "normal",
 			scaleFontColor : "#FFF",
 			scaleShowGridLines : true,
-			scaleGridLineColor : "rgba(255,255,255,.05)",
+			scaleGridLineColor : "rgba(255,255,255,.1)",
 			scaleGridLineWidth : 1,
 			barShowStroke : true,
 			barStrokeWidth : 2,

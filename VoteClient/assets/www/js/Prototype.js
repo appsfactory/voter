@@ -64,14 +64,14 @@ function shrinkQuestions() {
     Get survey question(s) from the server 
 *****************************************************/
 function getSurveys() {
-
+	waitForQuestionResults();
     $.post(ENDPOINT + "getSurveys", function (data) {
         currentSurveys = data;
         displaySurveys();
 
     },"json");
 
-
+	
    
 }
 
@@ -229,6 +229,8 @@ function displayQuestion(survey) {
             };
 
             submitResponse(response);
+            
+            waitForQuestionResults();
 
         };
 
@@ -330,6 +332,7 @@ function nextQuestion() {
     //Set a new timer to poll the question..
 
     $("#container").hide();
+    $("#Thanks").hide();
     $("#Waiting").show();
 
     questionPolling = setInterval(function () {
@@ -362,7 +365,7 @@ function nextQuestion() {
 /*****************************************************
    Display waiting div and start pooling for results..
 *****************************************************/
-function waitForQuestionResults(response) {
+function waitForQuestionResults() {
 
     // No more questions to show...
     $("#container").hide();
