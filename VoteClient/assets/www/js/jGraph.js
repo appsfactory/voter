@@ -320,8 +320,8 @@ window.Chart = function(context){
 	
 	this.Bar = function(data,options){
 		chart.Bar.defaults = {
-			scaleOverlay : true
-			scaleOverride : true,
+			scaleOverlay : true,
+			scaleOverride : false,
 			scaleSteps : null,
 			scaleStepWidth : null,
 			scaleStartValue : null,
@@ -332,7 +332,7 @@ window.Chart = function(context){
 			scaleFontFamily : "'Arial'",
 			scaleFontSize : 12,
 			scaleFontStyle : "normal",
-			scaleFontColor : "#000",
+			scaleFontColor : "#FFF",
 			scaleShowGridLines : true,
 			scaleGridLineColor : "rgba(0,0,0,.05)",
 			scaleGridLineWidth : 1,
