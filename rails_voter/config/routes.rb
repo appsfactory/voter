@@ -1,14 +1,15 @@
 Voter::Application.routes.draw do
-#  get "users/new"
-  get "users/index"
-
-  resources :stacks
+  resources :stacks do
+    get "present"
+    post "submitstack"
+  end
 
   get 'users/newbyid'
   post 'users/createbyid'
   resources :users
 
   get "home/index"
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
