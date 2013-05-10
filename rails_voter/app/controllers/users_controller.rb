@@ -17,6 +17,36 @@ class UsersController < ApplicationController
       @user = User.new
   end
 
+  def edit
+      @user = User.find(params[:id])
+  end
+
+  def update
+  end
+
+  def requestid
+      anony = "anon" + String(User.last.id + 1)
+      @user = User.create(name: anony, email: anony, password: anony, password_confirmation: anony)
+      return @user.id
+  end
+
+  def claim
+      if User.exists?(:id => params[:user][:id])
+      	 @user = User.find_by_id(params[:user][:id])
+	 if @user.update_attributes(params[:user])
+      	    response = "success"
+	 else
+	    response = "failure"
+	 end
+      else
+         response = "failure"
+      end
+  end
+
+  def submitclaim
+      @user = User.find_by_id(params[:user][:id])
+  end
+
   def newbyid
       @temp_user = User.new
   end
