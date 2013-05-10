@@ -1,6 +1,6 @@
 class CreateStacks < ActiveRecord::Migration
   def change
-    alter_table :stacks do |t|
+    create_table :stacks do |t|
       t.integer :id
       t.string :name
       t.string :question
