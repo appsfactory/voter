@@ -148,8 +148,8 @@ window.Chart = function(context){
 	};
 
 	//Variables global to the chart
-	var width = context.canvas.width;
-	var height = context.canvas.height;
+	var width = 300;
+	var height = 300;
 
 
 	//High pixel density displays - multiply the size of the canvas height/width by the device pixel ratio, then scale.
@@ -325,7 +325,7 @@ window.Chart = function(context){
 			scaleSteps : null,
 			scaleStepWidth : null,
 			scaleStartValue : null,
-			scaleLineColor : "rgba(0,0,0,1)",
+			scaleLineColor : "rgba(255,255,255,1)",
 			scaleLineWidth : 1,
 			scaleShowLabels : false,
 			scaleLabel : "<%=value%>",
@@ -340,7 +340,7 @@ window.Chart = function(context){
 			barStrokeWidth : 2,
 			barValueSpacing : 5,
 			barDatasetSpacing : 1,
-			animation : true,
+			animation : false,
 			animationSteps : 60,
 			animationEasing : "easeOutQuart",
 			onAnimationComplete : null
