@@ -1,27 +1,4 @@
-var sampledata = {
-  answers:[
-    {
-      label: "Moon",
-      value: 33,
-      color: "#FFF"
-    },
-    {
-      label: "Titan",
-      value: 45,
-      color: "#FFF"
-    },
-    {
-      label: "Pluto",
-      value: 60,
-      color: "#FFF"
-    },
-    {
-      label: "Mercury",
-      value: 20,
-      color: "#FFF"
-    },
-  ]
-};
+
 
 
 function drawGraph(data,canvas,type){
@@ -54,7 +31,7 @@ function drawBars(data, location) {
         datasets: [
 
             {
-                fillColor: "rgba(90,0,5,0.75)",
+                fillColor: "rgba(90,0,5,0.5)",
                 strokeColor: "rgba(90,0,5,1)",
                 data: []
             }

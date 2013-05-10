@@ -85,12 +85,18 @@ function displaySurveys() {
     //Create possible answer
     
     var title=document.createElement("h2");
+    var na=document.createElement("p");
     var br=document.createElement("br");
     var node=document.createTextNode("Available Surveys:");
+    var node2=document.createTextNode("No Available Surveys. Sorry :(");
     title.appendChild(node);
+    na.appendChild(node2);
+    na.className="centeralign";
     ans.appendChild(title);
     ans.appendChild(br);
-    
+    if(currentSurveys.length==0){
+    	ans.appendChild(na);
+    }
     
     
     
@@ -429,7 +435,7 @@ function drawBars(data) {
         datasets: [        
        
             {
-                fillColor: "rgba(90,0,5,0.75)",
+                fillColor: "rgba(90,0,5,0.5)",
                 strokeColor: "rgba(90,0,5,1)",
                 data: []
             }
