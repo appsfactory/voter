@@ -173,6 +173,7 @@ function showAllAnswers(q){
 }
 
 function returnToSurvey(){
+	finishSurvey();
   survey=null;
   current_edit=0;1;
 	display("ManageSurveys");

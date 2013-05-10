@@ -80,7 +80,7 @@ function guid() {
 function postSurveyToServer(survey)
 {
 	
-	survey.surveyId=survey.surveyId+"_"+guid;
+	survey.surveyId=survey.surveyId+"_"+guid();
 	
 	var queryString="id="+encodeURIComponent(survey.surveyId)+"&name="+ encodeURIComponent( survey.title)+"&";
 	

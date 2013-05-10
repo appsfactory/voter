@@ -183,6 +183,20 @@ function getSurveyObject(myfun) {
 
    
 }
+
+/*****************************************************
+    Get Admin Graph
+*****************************************************/
+function finishSurvey() {
+    
+    $.post(SERVER_ENDPOINT + "finishSurvey&id=" + encodeURIComponent(survey.id ), function (data) {
+
+        drawAdminBars(data.results);
+    },"json");
+}
+
+
+
 /*****************************************************
     Get Admin Graph
 *****************************************************/

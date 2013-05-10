@@ -197,6 +197,9 @@ function startMySurvey(){
   display("StartSurvey");
   document.getElementById("surveyname").innerHTML=survey.title;
 
+  
+
+
 }
 
 function gotoNextQuestion(){
@@ -223,13 +226,9 @@ function viewQuestion(){
     document.getElementById("Answers").appendChild(br);
   }
 
-<<<<<<< HEAD
    showAdminGraph() ;
 
 
-=======
-  drawGraph(sampledata, "QuestionGraph", 0);
->>>>>>> 39047918b5d85e60b852da0b3e7d0017d3329f6f
 }
 
 function toggleAccepting(){
@@ -257,7 +256,6 @@ function viewEndSurvey(){
 
 	getAdminGraphDropDown();
 
-  //drawGraph(sampledata,"SurveyGraph",1);
 }
 
 
