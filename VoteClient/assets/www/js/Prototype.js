@@ -64,7 +64,6 @@ function shrinkQuestions() {
     Get survey question(s) from the server 
 *****************************************************/
 function getSurveys() {
-	waitForQuestionResults();
     $.post(ENDPOINT + "getSurveys", function (data) {
         currentSurveys = data;
         displaySurveys();
@@ -80,6 +79,7 @@ function getSurveys() {
 *****************************************************/
 function displaySurveys() {
 
+	
     var ans = document.getElementById("Surveys");
     ans.innerHTML = "";
     //Create possible answer
