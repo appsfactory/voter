@@ -15,21 +15,25 @@
 
 </head>
 <body>
-<div id="container">
   <div id="ManageSurveys">
-    <h1>Manage Surveys</h1>
-    <br>
+  	<div class="ceiling">
+    	<h1>Manage Surveys</h1>
+    	<br>
     
-    <button type="button" class="button" onclick="addNewSurvey()">Add New Survey</button>
-    <div id="MySurveyList">
-
+    	<button type="button" class="button" onclick="addNewSurvey()">Add New Survey</button>
+    	<div id="MySurveyList">
+			
+    	</div>
+    	<div class="push"></div>
     </div>
-    <button type="button" class="button" onclick="goHome()">Back</button>
+    <div class="floor">
+    	<button class="button" type="button" onclick="goHome()">Back</button>
+    </div>
   </div>
 
   <div id="QuestionAdder" style.display=none>
     <h1>Create Survey</h1>
-    <p>Survey Name: <input type="text" name="name" id=name></p>
+    <p>Survey Name: <input class="textbox" type="text" name="name" id=name></p>
     <form>
       <button type="button" class="button" onclick="addNewQuestion()">Add Question</button>
       <div id="NewQuestions">
@@ -43,7 +47,7 @@
     <h1>Edit Question</h1>
     <br>
   <form>
-    <p>Question : <input type="text" name="question" id=question></p>
+    <p>Question : <input class="textbox" type="text" name="question" id=question></p>
 
       <div id="NewAnswers">
 
@@ -58,10 +62,12 @@
     <h1>Start Survey</h1>
     <p id="surveyname"></p>
     <br>
+    <div class="floor">
     <p id="numconnected">Number of clients connected: 0</p>
 
     <button type="button" class="button" onclick="returnToSurvey()">Cancel</button>
     <button type="button" class="button" onclick="viewQuestion()">Enter</button>
+    </div>
   </div>
 
   <div id="Question">
@@ -89,7 +95,6 @@
     <button type="button" class="button" onclick="returnToSurvey()">Done</button>
   </div>
 
-</div>
 </body>
 </html>
 

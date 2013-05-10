@@ -8,18 +8,23 @@
     </head>
     
       <body onload="resetLogin()">
-      <div id="container">
-          <h1>Survey <a href="admin_ui/create_account.html">Create Account</a></h1>
-          <form id="login" action="JavaScript:login()">
-            <p>Username:</p>
-            <input type="text" id="username"><br>
-            <p>Password:</p>
-            <input type="password" id="password"><br><br/>
-            <button type="button" class="button" onclick="cancelLogin()">Skip</button>
-            <input class="button" type="submit" value="Login">
-        </form>
-        
-        <p id="message">Note: You must log in to create a survey</p>
+      
+      	<div class="ceiling">
+      		
+       	   <h1>Survey <a class="rightalign" href="admin_ui/create_account.html">Create Account</a></h1>
+       	   <div class="push"></div>
+      	</div>
+      	<div class="floor">
+       	   <form id="login" action="JavaScript:login()">
+       	     <p>Username:</p>
+       	     <input class="textbox" type="text" id="username"><br>
+       	     <p>Password:</p>
+       	     <input class="textbox" type="password" id="password"><br><br/>
+       	     <button type="button" class="button" onclick="cancelLogin()">Skip</button>
+       	     <input class="button" type="submit" value="Login">
+       	 </form>
+       	 
+       	 <p id="message">Note: You must log in to create a survey</p>
         </div>
     </body>
     

@@ -12,7 +12,7 @@ var getMySurveys = function() {
 }
 
 function goHome(){
-  window.location="../surveyindex.html";
+  window.location="choose.html";
 }
 
 function  displayMySurveyList(){

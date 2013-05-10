@@ -1,7 +1,7 @@
 function login(){
   var usr = document.getElementById("username").value;
   var pass = document.getElementById("password").value;
-  if(usr!="username" || pass!="password"){
+  if(usr!="username" || pass!=""){
     document.getElementById("message").innerHTML="Incorrect login info";
     document.getElementById("password").value = "";
   }else{
