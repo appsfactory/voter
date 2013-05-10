@@ -154,13 +154,17 @@ window.Chart = function (context) {
 
     //High pixel density displays - multiply the size of the canvas height/width by the device pixel ratio, then scale.
     if (window.devicePixelRatio) {
-        context.canvas.style.width = width + "px";
-        context.canvas.style.height = height + "px";
+        context.canvas.style.width = width+"px";
+        context.canvas.style.height = heigh+"px";
+        //test
+        context.canvas.style.width = "100%";
+        context.canvas.style.height = "100%";
         context.canvas.height = height * window.devicePixelRatio;
         context.canvas.width = width * window.devicePixelRatio;
         context.scale(window.devicePixelRatio, window.devicePixelRatio);
     }
-
+    
+	
     this.PolarArea = function (data, options) {
 
         chart.PolarArea.defaults = {
@@ -252,7 +256,7 @@ window.Chart = function (context) {
             animationSteps: 100,
             animationEasing: "easeOutBounce",
             animateRotate: true,
-            animateScale: false,
+            animateScale: true,
             onAnimationComplete: null
         };
 
@@ -647,6 +651,7 @@ window.Chart = function (context) {
             ctx.restore();
         };
         function calculateDrawingSizes() {
+        	
             maxSize = (Min([width, height]) / 2);
 
             labelHeight = config.scaleFontSize * 2;
@@ -1422,6 +1427,5 @@ window.Chart = function (context) {
         return data ? fn(data) : fn;
     };
 }
-
 
 
