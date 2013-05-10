@@ -429,8 +429,8 @@ function drawBars(data) {
         datasets: [        
        
             {
-                fillColor: "rgba(151,187,205,0.5)",
-                strokeColor: "rgba(151,187,205,1)",
+                fillColor: "rgba(90,0,5,0.75)",
+                strokeColor: "rgba(90,0,5,1)",
                 data: []
             }
         ]
