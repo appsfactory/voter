@@ -164,7 +164,6 @@ function showAllAnswers(q){
     answer.id = "a"+i;
     answer.type = "text";
     answer.value = question.answers[i].answer;
-    answer.className="textbox needspace";
     na.appendChild(answer);
     na.appendChild(br);
   }
@@ -172,7 +171,7 @@ function showAllAnswers(q){
 
 function returnToSurvey(){
   survey=null;
-  current_edit=0;
+  current_edit=0;1;
 	display("ManageSurveys");
 }
 
@@ -234,8 +233,6 @@ function toggleAccepting(){
   if(document.getElementById("start").innerHTML=="Start Poll"){
     document.getElementById("start").innerHTML="Stop Poll";
     document.getElementById("next").style.display="none";
-    
-    
   }else{
     document.getElementById("start").style.display="none";
     document.getElementById("next").style.display="block";

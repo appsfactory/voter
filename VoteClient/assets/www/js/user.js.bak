@@ -30,18 +30,14 @@ function createUser(){
 
   //TODO send and confirm validity of new user
 
-createAccount(function(){
-	
-	  localStorage.username=usr;
+
+  localStorage.username=usr;
   localStorage.password=pass;
 
   //TODO create new user on server
 
   window.location="choose.html";
-  //resetNewLogin();
-});
-
-
+  resetNewLogin();
 
 }
 

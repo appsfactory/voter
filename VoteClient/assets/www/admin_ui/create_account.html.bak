@@ -4,8 +4,6 @@
     <head>
       <link rel="stylesheet" type="text/css" href="../css/StyleSheet.css" />
         <title>Create Account</title>
-         <script src="../js/jquery-1.8.3.min.js"></script>  
-  <script src="../js/serverComm.js"></script>
       <script src="../js/user.js"></script>
 
     </head>
@@ -14,11 +12,11 @@
           <h1>Create an Account</h1>
           <form id="login" action="JavaScript:createUser()">
             <p>Username:</p>
-            <input class="textbox" type="text" id="username"><br>
+            <input type="text" id="username"><br>
             <p>Password:</p>
-            <input class="textbox" type="password" id="password"><br>
+            <input type="password" id="password"><br>
             <p>Confirm Password:</p>
-            <input class="textbox" type="password" id="passwordc"><br><br>
+            <input type="password" id="passwordc"><br>
             <button type="button" class="button" onclick="cancelCreate">Cancel</button>
             <input class="button" type="submit" value="Login">
         </form>
