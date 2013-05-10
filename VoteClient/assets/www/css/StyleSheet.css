@@ -61,10 +61,11 @@
 }
 
 #container {
-
+		padding-left:5%;
+		padding-right:5%;
         margin: auto; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;
-        width:100%;
-		background-image:url(../img/bg2.gif);
+        width:90%;
+		background-image:url(../img/darkdenim3.png);
 		background-size:100%;
         /**
         background: -webkit-gradient(linear, left top, left bottom, from(#0f0f0f), to(#7d7373));
@@ -79,24 +80,18 @@
 
 
 .button {
+	width:100%;
 	font-size:18px;
-	-moz-box-shadow:inset -6px -6px 10px -50px #ffffff;
-	-webkit-box-shadow:inset -6px -6px 10px -50px #ffffff;
-	box-shadow:inset -6px -6px 10px -50px #ffffff;
-	
-	border-bottom:3px solid #dcdcdc;
-	border-right:3px solid #dcdcdc;
+	height: 50px;
 	text-align:center;
 	display:inline-block;
 	color:white;
-	font-family:Verdana, Geneva, sans-serif;
+	font-family:Arial;
 	font-size:20px;
-	
 	padding-bottom:5px;
 	padding-top:5px;
 	margin-bottom:5px;
 	text-decoration:none;
-	text-shadow:1px 1px 0px #ffffff;
 }.button:active {
 	position:relative;
 	top:1px;
@@ -105,4 +100,18 @@
 
 
 div {}
-a {}
+a {
+color:white;
+font-size:12px;
+text-align:right;
+text-decoration:none;
+}
+
+h1{
+	color:white;
+	
+}
+
+p{
+	color:"#BBB";
+}
