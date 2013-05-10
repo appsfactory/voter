@@ -83,6 +83,17 @@ function displaySurveys() {
     var ans = document.getElementById("Surveys");
     ans.innerHTML = "";
     //Create possible answer
+    
+    var title=document.createElement("h2");
+    var br=document.createElement("br");
+    var node=document.createTextNode("Available Surveys:");
+    title.appendChild(node);
+    ans.appendChild(title);
+    ans.appendChild(br);
+    
+    
+    
+    
     for (var i in currentSurveys) {
         survey = currentSurveys[i];
         if (survey.status != "available") continue;
@@ -95,7 +106,6 @@ function displaySurveys() {
         button.id = survey.ID;
         button.className = "button";
         button.innerHTML = survey.label;
-        button.style.width = "150px";
         ans.appendChild(button);
         ans.appendChild(spacer);
         button.onclick = function () {
@@ -178,11 +188,22 @@ function displayQuestion(survey) {
     
     var question = document.getElementById("Question");
     //Display the question
-    question.innerHTML = survey.label;
+    question.innerHTML = "";
 
     var ans = document.getElementById("Options");
     ans.innerHTML = "";
     //Create possible answer
+    
+    
+    var title=document.createElement("h2");
+    var br=document.createElement("br");
+    var node=document.createTextNode(survey.label);
+    title.appendChild(node);
+    question.appendChild(title);
+    question.appendChild(br);
+    
+    
+    
     for (var i in survey.options) {
         answer = survey.options[i]; 
         //Create button an spacer div
@@ -195,7 +216,6 @@ function displayQuestion(survey) {
 		button.alt=answer.ID;
         button.className = "button";
         button.innerHTML = answer.label;
-        button.style.width = "150px";
         ans.appendChild(button);
         ans.appendChild(spacer);
         button.onclick = function () {
