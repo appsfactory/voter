@@ -8,11 +8,30 @@ class UsersController < ApplicationController
       if @user.save
       	 redirect_to @user      	 
       else
-	 render 'new'
+	 render '/users/new'
       end
   end
 
   def new
       @user = User.new
+  end
+
+  def newbyid
+      @temp_user = User.new
+  end
+
+  def createbyid
+      @temp_user = User.new(params[:user])
+      if User.exists?(:id => @temp_user.id)     
+      	@user = User.find(@temp_user.id)
+	@user = @temp_user 
+	if @user.save
+      	    redirect_to @user
+      	else
+	    render '/users/newbyid'
+        end
+      else
+	render '/users/newbyid'
+      end
   end
 end

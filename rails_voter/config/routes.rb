@@ -3,6 +3,9 @@ Voter::Application.routes.draw do
   get "users/index"
 
   resources :stacks
+
+  get 'users/newbyid'
+  post 'users/createbyid'
   resources :users
 
   get "home/index"
