@@ -49,6 +49,14 @@ function supports_html5_storage() {
 }
 
 
+function showAdminDropDownGraph() {
+    var dropdown = document.getElementById("graphSelect");
+    
+    $.post(SERVER_ENDPOINT + "getQuestionResults&id=" + survey.ID + "&questionId=" + dropdown.options[dropdown.selectedIndex].value, function (data) {
+
+        drawAdminBars(data.results,"SurveyGraph");
+    },"json");
+}
 
 /*****************************************************
     Post the newly created survey to the server..
@@ -110,6 +118,24 @@ function getAllSurveys() {
 
 
 /*****************************************************
+    Get survey question(s) from the server 
+*****************************************************/
+function setQuestionStatus(status) {
+
+    $.post(SERVER_ENDPOINT + "setQuestionStatus&id="+encodeURIComponent(survey.id)+"&questionId="+ encodeURIComponent(survey.questions[current_edit].ID)+"&status="+encodeURIComponent(status), function (data) {
+      
+        
+        	
+      
+
+    },"json");
+
+
+   
+}
+
+
+/*****************************************************
     Get survey object
 *****************************************************/
 function getSurveyObject(myfun) {
@@ -121,7 +147,18 @@ function getSurveyObject(myfun) {
        	
        	for(var i in survey.questions){
        			
+       			var q=survey.questions[i];
        			
+       			q.question=q.label;
+       			q.answers=q.options;
+       			q.id=q.ID;
+       			
+       			for(var j in q.answers){
+       				
+       				var a=q.answers[j];
+       				a.answer=a.label;
+       				
+       			}
        	}
        	
          myfun();
@@ -130,7 +167,61 @@ function getSurveyObject(myfun) {
 
    
 }
+/*****************************************************
+    Get Admin Graph
+*****************************************************/
+function showAdminGraph() {
+    
+    $.post(SERVER_ENDPOINT + "getQuestionResults&id=" + encodeURIComponent(survey.id )+ "&questionId=" + encodeURIComponent(survey.questions[current_edit].ID), function (data) {
 
+        drawAdminBars(data.results);
+    },"json");
+}
+
+
+
+/*****************************************************
+    Draw Admin Graph
+*****************************************************/
+function drawAdminBars(data,canvas) {
+clearPoolInterval();
+
+if(canvas=="undefined" ||canvas==null)canvas="QuestionGraph";
+
+    var barChartData = {
+        //Set them clear
+        labels: [],
+        datasets: [        
+       
+            {
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,1)",
+                data: []
+            }
+        ]
+
+    };
+
+    for (var i in data) {
+        
+        barChartData.labels.push(data[i].label);
+        barChartData.datasets[0].data.push( data[i].value       );
+    }
+
+    var myLine = new Chart(document.getElementById(canvas).getContext("2d")).Bar(barChartData);
+
+
+
+}
+
+
+function clearPoolInterval(){
+	
+		if(usercounttimer!=0){
+			clearInterval(usercounttimer);
+			usercounttimer=0;
+		}
+}
 
 var usercounttimer=0;
 /*****************************************************
@@ -138,6 +229,7 @@ var usercounttimer=0;
 *****************************************************/
 function enableSurvey() {
 
+clearPoolInterval();
     $.post(SERVER_ENDPOINT + "chooseSurvey&id="+encodeURIComponent(survey.id), function (data) {
        
        
