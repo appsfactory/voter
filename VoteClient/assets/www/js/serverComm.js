@@ -58,6 +58,20 @@ function showAdminDropDownGraph() {
     },"json");
 }
 
+
+
+function s4() {
+  return Math.floor((1 + Math.random()) * 0x10000)
+             .toString(16)
+             .substring(1);
+};
+
+function guid() {
+  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+         s4() + '-' + s4() + s4() + s4();
+}
+
+
 /*****************************************************
     Post the newly created survey to the server..
 *****************************************************/
@@ -65,6 +79,8 @@ function showAdminDropDownGraph() {
 
 function postSurveyToServer(survey)
 {
+	
+	survey.surveyId=survey.surveyId+"_"+guid();
 	
 	var queryString="id="+encodeURIComponent(survey.surveyId)+"&name="+ encodeURIComponent( survey.title)+"&";
 	
