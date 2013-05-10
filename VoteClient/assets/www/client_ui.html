@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Survey</title>
+    <link href="css/StyleSheet.css" type="text/css" rel="stylesheet"></link>
+    <script src="js/jquery-1.8.3.min.js"></script>
+        <script src="js/jGraph.js"></script>
+    <script src="js/Prototype.js"></script>
+    
+
+</head>
+<body onload="getSurveys()">
+    
+    <div id="container">
+             <div id="Surveys"></div>
+            <div id="Question"></div>
+             <div id="Options"></div>
+
+
+    </div>
+
+
+    <div id="Thanks"  style="display:none" >
+            Thanks for answering our survey.
+        
+        <select id="graphSelect" onchange="showGraph()"></select>
+        <canvas id="canvas"></canvas>
+
+        </div>
+
+    <div id="Wait"  style="display:none">
+             
+             <div id="Waiting">Please wait for other participants to submit their answers..</div>
+        </div>
+</body>
+</html>

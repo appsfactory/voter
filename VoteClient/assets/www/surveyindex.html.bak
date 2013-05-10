@@ -4,8 +4,6 @@
     <head>
       <link rel="stylesheet" type="text/css" href="css/StyleSheet.css" />
         <title>Survey App</title>
-          <script src="js/jquery-1.8.3.min.js"></script>  
-  <script src="js/serverComm.js"></script>
         <script src="js/user.js"></script>
     </head>
     

@@ -233,8 +233,6 @@ function toggleAccepting(){
   if(document.getElementById("start").innerHTML=="Start Poll"){
     document.getElementById("start").innerHTML="Stop Poll";
     document.getElementById("next").style.display="none";
-    
-    
   }else{
     document.getElementById("start").style.display="none";
     document.getElementById("next").style.display="block";
