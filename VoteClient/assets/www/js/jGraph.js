@@ -327,7 +327,7 @@ window.Chart = function (context) {
             scaleStartValue: null,
             scaleLineColor: "rgba(255,255,255,1)",
             scaleLineWidth: 1,
-            scaleShowLabels: true,
+            scaleShowLabels: false,
             scaleLabel: "<%=value%>",
             scaleFontFamily: "'Arial'",
             scaleFontSize: 12,

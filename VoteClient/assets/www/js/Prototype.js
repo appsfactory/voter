@@ -83,7 +83,7 @@ function displaySurveys() {
     var ans = document.getElementById("Surveys");
     ans.innerHTML = "";
     
-    var title=document.createElement("h1");
+    var title=document.createElement("h2");
     var br=document.createElement("br");
     var node=document.createTextNode("Available Surveys:");
     node.className=("centeralign");
