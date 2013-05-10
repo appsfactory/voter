@@ -4,29 +4,33 @@
     <title>Survey</title>
     <link href="css/StyleSheet.css" type="text/css" rel="stylesheet"></link>
     <script src="js/jquery-1.8.3.min.js"></script>
+        <script src="js/jGraph.js"></script>
     <script src="js/Prototype.js"></script>
-
+    
 
 </head>
-<body onload="getSurvey()">
-
+<body onload="getSurveys()">
+    
     <div id="container">
-            <div id="img">
-             
-            <div id="Question"> 
-            	
-			</div>
-
-             <div id="Options">
-            </div>
-            </div>  
+             <div id="Surveys"></div>
+            <div id="Question"></div>
+             <div id="Options"></div>
 
 
     </div>
 
 
-    <div id="Thanks">
+    <div id="Thanks"  >
             Thanks for answering our survey.
+        
+        <select id="graphSelect" onchange="showGraph()"></select>
+        <canvas id="canvas"></canvas>
+
+        </div>
+
+    <div id="Wait">
+             
+             <div id="Waiting">Please wait for other participants to submit their answers..</div>
         </div>
 </body>
 </html>

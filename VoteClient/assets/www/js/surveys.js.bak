@@ -194,7 +194,7 @@ function startMySurvey(){
 
   //TODO get how many have connected
 
-	enableSurvey();
+	
 
 }
 
