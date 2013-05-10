@@ -446,3 +446,7 @@ function drawBars(data) {
 
 
 }
+
+function goHome(){
+	window.location="surveyindex.html";
+}
