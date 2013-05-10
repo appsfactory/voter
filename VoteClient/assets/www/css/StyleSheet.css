@@ -103,7 +103,7 @@ div {}
 a {
 color:white;
 font-size:12px;
-text-align:right;
+align:right;
 text-decoration:none;
 }
 
@@ -113,5 +113,9 @@ h1{
 }
 
 p{
-	color:"#BBB";
+	color:"#BBBBB";
+}
+
+input{
+	width: 100%;
 }
