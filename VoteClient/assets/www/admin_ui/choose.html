@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="../css/StyleSheet.css" />
+        <title>Choose</title>
+        <script>
+
+          function goAdmin(){
+            window.location = "admin_main.html";
+          }
+          function goClient(){
+            window.location = "../survey.html";
+          }
+
+        </script>
+
+    </head>
+      <body>
+      <div id="container">
+        <button type="button" class="button" onclick="goClient()">Participate in Survey</button><br>
+        <button type="button" class="button" onclick="goAdmin()">Manage My Surveys</button>
+        </div>
+    </body>
+</html>

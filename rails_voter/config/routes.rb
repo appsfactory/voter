@@ -4,6 +4,9 @@ Voter::Application.routes.draw do
     post "submitstack"
   end
 
+  get 'users/newbyid'
+  post 'users/createbyid'
+  resources :users
 
   get "home/index"
 
