@@ -82,16 +82,6 @@ function displaySurveys() {
 
     var ans = document.getElementById("Surveys");
     ans.innerHTML = "";
-    
-    var title=document.createElement("h2");
-    var br=document.createElement("br");
-    var node=document.createTextNode("Available Surveys:");
-    node.className=("centeralign");
-    title.appendChild(node);
-    ans.appendChild(title);
-    ans.appendChild(br);
-    
-    
     //Create possible answer
     for (var i in currentSurveys) {
         survey = currentSurveys[i];
@@ -105,6 +95,7 @@ function displaySurveys() {
         button.id = survey.ID;
         button.className = "button";
         button.innerHTML = survey.label;
+        button.style.width = "150px";
         ans.appendChild(button);
         ans.appendChild(spacer);
         button.onclick = function () {
@@ -187,15 +178,8 @@ function displayQuestion(survey) {
     
     var question = document.getElementById("Question");
     //Display the question
-    question.innerHTML = "";
-    
-    var qt=document.createElement("h2");
-    var br=document.createElement("br");
-    var node=document.createTextNode(survey.label);
-    qt.appendChild(node);
-    question.appendChild(qt);
-	question.appendChild(br);
-    
+    question.innerHTML = survey.label;
+
     var ans = document.getElementById("Options");
     ans.innerHTML = "";
     //Create possible answer
@@ -211,6 +195,7 @@ function displayQuestion(survey) {
 		button.alt=answer.ID;
         button.className = "button";
         button.innerHTML = answer.label;
+        button.style.width = "150px";
         ans.appendChild(button);
         ans.appendChild(spacer);
         button.onclick = function () {
@@ -431,7 +416,7 @@ function drawBars(data) {
 
     for (var i in data) {
         
-        barChartData.labels.push(data[i].label);
+        barChartData.labels.push(""+data[i].label);
         barChartData.datasets[0].data.push( data[i].value       );
     }
 

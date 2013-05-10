@@ -205,7 +205,7 @@ if(canvas=="undefined" ||canvas==null)canvas="QuestionGraph";
     for (var i in data) {
         
         barChartData.labels.push(""+data[i].label);
-        barChartData.datasets[0].data.push( data[i].value       );
+        barChartData.datasets[0].data.push( parseInt(data[i].value  )     );
     }
 
     var myLine = new Chart(document.getElementById(canvas).getContext("2d")).Bar(barChartData);
