@@ -2,6 +2,9 @@
 }
 
 
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 255, 0.5);  
+}
 
 #canvas {
     margin: auto; position: absolute; top: 0px; bottom: 0px; left: 0px; right: 0px;
@@ -36,7 +39,9 @@
 	padding-top:5px;
 	margin-bottom:5px;
 	text-decoration:none;
+	
 }.button:active {
+	
 	position:relative;
 	top:1px;
 }
@@ -70,6 +75,7 @@ html{
         width:90%;
 		background-image:url(../img/grey_wash_wall.png);
         height:100%;
+        
 }
 
 .rightalign{
@@ -85,6 +91,10 @@ html{
 	font-size:24px;
 }
 
-.centervert{
-	vertical-align:center;
+#chooser{
+	margin-top:25%;
+}
+
+.needspace{
+	width:95%;
 }

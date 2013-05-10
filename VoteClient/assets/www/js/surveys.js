@@ -160,6 +160,7 @@ function showAllAnswers(q){
     answer.id = "a"+i;
     answer.type = "text";
     answer.value = question.answers[i].answer;
+    answer.className="textbox needspace";
     na.appendChild(answer);
     na.appendChild(br);
   }
@@ -167,7 +168,7 @@ function showAllAnswers(q){
 
 function returnToSurvey(){
   survey=null;
-  current_edit=0;1;
+  current_edit=0;
 	display("ManageSurveys");
 }
 
