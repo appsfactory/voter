@@ -8,11 +8,8 @@ Voter::Application.routes.draw do
     post "submitstack"
   end
 
-  put 'users/submitclaim'
-  post 'users/claim'
+  match 'users/claim', to: 'users#update'
   get 'users/requestid'
-  get 'users/newbyid'
-  post 'users/createbyid'
   resources :users
 
   get "home/index"

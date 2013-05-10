@@ -10,8 +10,6 @@ Voter::Application.routes.draw do
 
   post 'users/claim'
   get 'users/requestid'
-  get 'users/newbyid'
-  post 'users/createbyid'
   resources :users
 
   get "home/index"

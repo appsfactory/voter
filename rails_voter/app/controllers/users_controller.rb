@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_filter :verify_authenticity_token, :only => [:update]
+
   def show
       @user = User.find(params[:id])
   end
@@ -22,47 +24,33 @@ class UsersController < ApplicationController
   end
 
   def update
+      #ONLY WORKS WITH JSON where params contains all required info
+      
+      #return render :text => "The object is #{params}"
+      if User.exists?(:id => params[:user][:id])
+	@user = User.find(params[:user][:id])
+      	if @user.update_attributes(params[:user])
+           respond_to do |format|
+	      format.json { render json: "success" }
+	   end
+      	else
+	   respond_to do |format|
+	      format.json { render json: "failure" }
+	   end
+      	end
+      else
+	respond_to do |format|
+	   format.json { render json: "failure_exists" }
+	end
+      end
   end
 
   def requestid
       anony = "anon" + String(User.last.id + 1)
       @user = User.create(name: anony, email: anony, password: anony, password_confirmation: anony)
-      return @user.id
-  end
-
-  def claim
-      if User.exists?(:id => params[:user][:id])
-      	 @user = User.find_by_id(params[:user][:id])
-	 if @user.update_attributes(params[:user])
-      	    response = "success"
-	 else
-	    response = "failure"
-	 end
-      else
-         response = "failure"
-      end
-  end
-
-  def submitclaim
-      @user = User.find_by_id(params[:user][:id])
-  end
-
-  def newbyid
-      @temp_user = User.new
-  end
-
-  def createbyid
-      @temp_user = User.new(params[:user])
-      if User.exists?(:id => @temp_user.id)     
-      	@user = User.find(@temp_user.id)
-	@user = @temp_user 
-	if @user.save
-      	    redirect_to @user
-      	else
-	    render '/users/newbyid'
-        end
-      else
-	render '/users/newbyid'
+      respond_to do |format|
+      #      format.html # index.html.erb
+            format.json { render json: @user.id }
       end
   end
 end
