@@ -4,7 +4,6 @@ var surveys = [];
 var survey = null;
 
 var current_edit=0;
-var curq = 0;
 
 var getMySurveys = function() {
   
@@ -33,7 +32,7 @@ function  displayMySurveyList(){
         //Set attributes
         button.id = "s"+i;
         button.alt=i;
-        button.className = "button altcolor";
+        button.className = "button";
         button.innerHTML = name;
         ans.appendChild(button);
         button.onclick = function () {
@@ -141,7 +140,7 @@ function showAllQuestions(){
     var button = document.createElement("div");
     button.id = "q"+i;
     button.alt=i;
-    button.className = "button altcolor";
+    button.className = "button";
     button.innerHTML = survey.questions[i].question; //Could also display "Question <i+1>"
     q.appendChild(button);
     button.onclick = function () {
@@ -153,11 +152,9 @@ function showAllQuestions(){
 }
 
 function showAllAnswers(q){
-	curq=q;
   var question = survey.questions[q];
   display("AnswerAdder");
   document.getElementById("question").value=question.question;
-  document.getElementById("remove").alt=q;
   var na = document.getElementById("NewAnswers");
   na.innerHTML="";
   for(var i=0;i<question.answers.length;i++){
@@ -176,7 +173,6 @@ function showAllAnswers(q){
 }
 
 function returnToSurvey(){
-	finishSurvey();
   survey=null;
   current_edit=0;1;
 	display("ManageSurveys");
@@ -299,20 +295,4 @@ function getAdminGraphDropDown() {
 
 
 
-}
-
-function deleteNewSurvey(){
-  displayMySurveyList();
-  survey={
-        surveyId: 0,
-        title: "",
-
-        questions: []
-      };
-}
-
-function removeQuestion(){
-	
-	survey.questions.splice(curq,1);
-	showAllQuestions();
 }

@@ -113,6 +113,10 @@ select{
 	border: 0px solid #3366FF;
 }
 
+.moreSpace{
+	margin-top: 15%;
+}
+
 .altcolor{
 	background-color: #444444;
 	color: white;

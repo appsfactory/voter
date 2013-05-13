@@ -12,7 +12,10 @@
           function goClient(){
             window.location = "../client_ui.html";
           }
-
+		  
+		  function logout(){
+			window.location = "../surveyindex.html";
+		  }
         </script>
 
     </head>
@@ -20,6 +23,9 @@
       <div id="chooser">
         <button type="button" class="button bigassbutton" onclick="goClient()">Participate in Survey</button><br><br>
         <button type="button" class="button bigassbutton" onclick="goAdmin()">Manage My Surveys</button>
-        </div>
+		<div class = "moreSpace">
+		<button type="button" class="button bigassbutton" onclick="logout()">Logout</button>
+		</div>
+	  </div>
     </body>
 </html>
