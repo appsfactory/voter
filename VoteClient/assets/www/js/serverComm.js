@@ -82,7 +82,7 @@ function postSurveyToServer(survey)
 	
 	survey.surveyId=survey.surveyId+"_"+guid();
 	
-	var queryString="id="+encodeURIComponent(survey.surveyId)+"&name="+ encodeURIComponent( survey.title)+"&";
+	var queryString="id="+encodeURIComponent(survey.surveyId)+"&name="+ encodeURIComponent( survey.title)+"&owner="+ encodeURIComponent(  localStorage["username"] )+"&";
 	
 	for (var i in survey.questions){		
 		var q=survey.questions[i];

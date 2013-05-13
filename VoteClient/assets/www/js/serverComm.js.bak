@@ -82,7 +82,7 @@ function postSurveyToServer(survey)
 	
 	survey.surveyId=survey.surveyId+"_"+guid();
 	
-	var queryString="id="+encodeURIComponent(survey.surveyId)+"&name="+ encodeURIComponent( survey.title)+"&";
+	var queryString="id="+encodeURIComponent(survey.surveyId)+"&name="+ encodeURIComponent( survey.title)+"&owner="+ encodeURIComponent( survey.title)+"&";
 	
 	for (var i in survey.questions){		
 		var q=survey.questions[i];
@@ -113,13 +113,17 @@ function postSurveyToServer(survey)
 function getAllSurveys() {
 
     $.post(SERVER_ENDPOINT + "getSurveys", function (data) {
-        surveys = data;
+         
         
+        surveys=new Array();
         for (var i in data){
         	
-        	var s=surveys[i];
+        	var s=data[i];
         	s.id=s.ID;
         	s.title=s.label;
+        if(s.owner== localStorage["username"])
+        		surveys.push(s);
+        	
         }
         	
         
