@@ -24,9 +24,6 @@ class UsersController < ApplicationController
   end
 
   def update
-      #ONLY WORKS WITH JSON where params contains all required info
-      
-      #return render :text => "The object is #{params}"
       if User.exists?(:id => params[:user][:id])
 	@user = User.find(params[:user][:id])
       	if @user.update_attributes(params[:user])
