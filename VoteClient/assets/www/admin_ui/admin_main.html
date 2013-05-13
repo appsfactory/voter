@@ -44,6 +44,7 @@
 
       </div>
       <br>
+      <button type="button" class="button" onclick="deleteNewSurvey()">Cancel</button>
       <button type="button" class="button" onclick="createNewSurvey()">Save</button>
     </form>
   </div>
@@ -59,8 +60,8 @@
       </div>
       <br>
       <button type="button" class="button" onclick="addNewAnswer()">Add Answer</button>
-
-      <button type="button" class="button" onclick="finishEditAnswers()">Add Question</button>
+	  <button id="remove" type="button" class="button" onclick="removeQuestion()">Delete Question</button>
+      <button type="button" class="button" onclick="finishEditAnswers()">Save</button>
   </form>
 </div>
 

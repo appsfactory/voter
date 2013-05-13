@@ -4,6 +4,7 @@ var surveys = [];
 var survey = null;
 
 var current_edit=0;
+var curq = 0;
 
 var getMySurveys = function() {
   
@@ -152,9 +153,11 @@ function showAllQuestions(){
 }
 
 function showAllAnswers(q){
+	curq=q;
   var question = survey.questions[q];
   display("AnswerAdder");
   document.getElementById("question").value=question.question;
+  document.getElementById("remove").alt=q;
   var na = document.getElementById("NewAnswers");
   na.innerHTML="";
   for(var i=0;i<question.answers.length;i++){
@@ -296,4 +299,20 @@ function getAdminGraphDropDown() {
 
 
 
+}
+
+function deleteNewSurvey(){
+  displayMySurveyList();
+  survey={
+        surveyId: 0,
+        title: "",
+
+        questions: []
+      };
+}
+
+function removeQuestion(){
+	
+	survey.questions.splice(curq,1);
+	showAllQuestions();
 }
