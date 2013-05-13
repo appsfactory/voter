@@ -183,6 +183,20 @@ function getSurveyObject(myfun) {
 
    
 }
+
+/*****************************************************
+    Get Admin Graph
+*****************************************************/
+function finishSurvey() {
+    
+    $.post(SERVER_ENDPOINT + "finishSurvey&id=" + encodeURIComponent(survey.id ), function (data) {
+
+       
+    },"json");
+}
+
+
+
 /*****************************************************
     Get Admin Graph
 *****************************************************/
@@ -191,6 +205,11 @@ function showAdminGraph() {
     $.post(SERVER_ENDPOINT + "getQuestionResults&id=" + encodeURIComponent(survey.id )+ "&questionId=" + encodeURIComponent(survey.questions[current_edit].ID), function (data) {
 
         drawAdminBars(data.results);
+        var total = 0;
+        for(var i=0;i<data.results.length;i++){
+        	total+=parseInt(data.results[i].value);
+        }
+        document.getElementById("numanswered").innerHTML="Number of responses: "+total;
     },"json");
 }
 
