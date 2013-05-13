@@ -10,7 +10,7 @@
             window.location = "admin_main.html";
           }
           function goClient(){
-            window.location = "../survey.html";
+            window.location = "../client_ui/client_main";
           }
 
         </script>

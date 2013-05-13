@@ -3,14 +3,16 @@
 <div style="border: 1px solid #000;">
 <form name="stackSubmit" id="stackSubmit" action="<%= stack_submitstack_path(@stack) %>" method="post">
 
+<input type="hidden" name="stackName" value="<%= @stack.name %>">
+
 <% Stack.where("name = '#{@stack.name}'").each do |record| %>
 
 <p><%= record.question %></p>
 
-<input type="radio" id="<%= record.answer %>" name="<%= record.question %>" value="<%= record.answer %>"><%= record.answer %><br />
+<input type="radio" id="answer" name="<%= record.question %>" value="<%= record.answer %>"><%= record.answer %><br />
 
  <% parseChoices(record.choices).each do |choice| %>
- <input type="radio" id="<%= choice %>" name="<%= record.question %>" value="<%= choice %>"><%= choice %>
+ <input type="radio" id="answer" name="<%= record.question %>" value="<%= choice %>"><%= choice %>
  <br />
  <% end %>
 <br />

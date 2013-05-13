@@ -29,4 +29,14 @@ ActiveRecord::Schema.define(:version => 20130509164010) do
     t.string   "password_digest"
   end
 
+  create_table "votes", :force => true do |t|
+    t.string   "name"
+    t.string   "question"
+    t.string   "answer"
+    t.integer  "counter"
+    t.integer  "user"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
 end

@@ -176,7 +176,7 @@ public partial class Results : System.Web.UI.Page
     	  	
     	 
     	 writeHeaders();
-    	Response.Write("{\"result\":\""+ result+"\" , \"message\":\""+ message+"\", \"token\":\""+ u.token +"\"}");
+    	Response.Write("{\"result\":\""+ message+"\" , \"message\":\""+ message+"\", \"token\":\""+ u.token +"\"}");
     }
 
     void moveToNextQuestion()

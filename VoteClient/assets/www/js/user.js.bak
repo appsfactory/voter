@@ -39,11 +39,11 @@ function createUser(){
   localStorage.password=pass;
 
   //TODO create new user on server
-createAccount(function(){
+createAccount(function(){}
  
  	window.location="choose.html";
   //resetNewLogin();
-}
+
 );
 
  
