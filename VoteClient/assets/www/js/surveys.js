@@ -32,7 +32,7 @@ function  displayMySurveyList(){
         //Set attributes
         button.id = "s"+i;
         button.alt=i;
-        button.className = "button";
+        button.className = "button altcolor";
         button.innerHTML = name;
         ans.appendChild(button);
         button.onclick = function () {
@@ -140,7 +140,7 @@ function showAllQuestions(){
     var button = document.createElement("div");
     button.id = "q"+i;
     button.alt=i;
-    button.className = "button";
+    button.className = "button altcolor";
     button.innerHTML = survey.questions[i].question; //Could also display "Question <i+1>"
     q.appendChild(button);
     button.onclick = function () {

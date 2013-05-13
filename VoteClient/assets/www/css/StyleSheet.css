@@ -112,3 +112,8 @@ select{
 	height: 2.25em;
 	border: 0px solid #3366FF;
 }
+
+.altcolor{
+	background-color: #444444;
+	color: white;
+}
