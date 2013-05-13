@@ -113,13 +113,17 @@ function postSurveyToServer(survey)
 function getAllSurveys() {
 
     $.post(SERVER_ENDPOINT + "getSurveys", function (data) {
-        surveys = data;
+         
         
+        surveys=new Array();
         for (var i in data){
         	
-        	var s=surveys[i];
+        	var s=data[i];
         	s.id=s.ID;
         	s.title=s.label;
+        if(s.owner== localStorage["username"])
+        		surveys.push(s);
+        	
         }
         	
         
